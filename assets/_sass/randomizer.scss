@@ -69,5 +69,7 @@ input {
 }
 
 #class-wrapper{
-    border: 1px solid var(--gold)
+    border: 1px solid var(--gold);
+    box-sizing: border-box;
+    position: relative;
 }
