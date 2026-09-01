@@ -44,6 +44,12 @@ input {
     }
 }
 
+.elements-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    min-width: 250px;
+}
+
 #class-attributes, #class-major-skills, #class-minor-skills {
     list-style-type: none;
     padding-inline-start: 0px;
