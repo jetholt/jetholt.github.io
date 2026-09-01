@@ -3,10 +3,17 @@ layout: default
 heading: Morrowind Randomizer
 ---
 <div id="app">
-    <div class="wrapper" id="race-wrapper">
-        <input type="image" src="/assets/images/reroll.png"/>
-        <label>Race</label>
-        <div id="race"></div>
+    <div>
+        <div class="wrapper elements-wrapper" id="race-wrapper">
+            <input type="image" src="/assets/images/reroll.png"/>
+            <label>Race</label>
+            <div id="race"></div>
+        </div>
+        <div class="wrapper elements-wrapper" id="birthsign-wrapper">
+            <input type="image" src="/assets/images/reroll.png"/>
+            <label>Birthsign</label>
+            <div id="birthsign"></div>
+        </div>
     </div>
     <div id="class-wrapper">
         <input type="image" src="/assets/images/reroll.png"/>
@@ -35,22 +42,15 @@ heading: Morrowind Randomizer
             </div>
         </div>
     </div>
-    <div class="elements-wrapper">
-        <div class="wrapper elements-wrapper" id="birthsign-wrapper">
-            <input type="image" src="/assets/images/reroll.png"/>
-            <label>Birthsign</label>
-            <div id="birthsign"></div>
-        </div>
-        <div class="wrapper elements-wrapper" id="objective-wrapper">
-            <input type="image" src="/assets/images/reroll.png"/>
-            <label>Objective</label>
-            <div id="objective"></div>
-        </div>
-        <div class="wrapper elements-wrapper" id="stipulations-wrapper">
-            <input type="image" src="/assets/images/reroll.png"/>
-            <label>Stipulations</label>
-            <ul id="stipulations">
-            </ul>
-        </div>
+    <div class="wrapper" id="objective-wrapper">
+        <input type="image" src="/assets/images/reroll.png"/>
+        <label>Objective</label>
+        <div id="objective"></div>
+    </div>
+    <div class="wrapper" id="stipulations-wrapper">
+        <input type="image" src="/assets/images/reroll.png"/>
+        <label>Stipulations</label>
+        <ul id="stipulations">
+        </ul>
     </div>
 </div>

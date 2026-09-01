@@ -1,3 +1,10 @@
+// Global variables
+var race = "";
+var className = "";
+var classSpecialization = "";
+var classSkills = [];
+var objective = "";
+var stipulations = []; // Might not need this one
 
 const RacesType = Object.freeze({
     ARGONIAN: "Argonian",
@@ -684,19 +691,22 @@ const ClassesType = Object.freeze({
     }
 })
 
-const ObjectivesType = Object.freeze({
+const GeographicObjectivesType = Object.freeze({
     "Complete all miscellaneous quests and dungeons in Bitter Coast + Ascadian Isles": {},
     "Complete all miscellaneous quests and dungeons in West Gash + Sheogorad": {},
     "Complete all miscellaneous quests and dungeons in Grazelands + Molag Amur": {},
     "Complete all miscellaneous quests and dungeons in Azura's Coast": {},
-    "Complete all miscellaneous quests and dungeons in Ashlands + Red Mountain": {},
-    "Complete all miscellaneous quests and dungeons in Cyrodiil": {},
-    "Complete all miscellaneous quests and dungeons in Skyrim": {},
+    "Complete all miscellaneous quests and dungeons in The Ashlands + Red Mountain": {},
     "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 1": {},
     "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 2": {},
     "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 3": {},
     "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 4": {},
     "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 5": {},
+/*    "Complete all miscellaneous quests and dungeons in Cyrodiil": {},
+    "Complete all miscellaneous quests and dungeons in Skyrim": {}, */
+})
+
+const FactionObjectivesType = Object.freeze({
     "Complete Vvardenfell Fighters Guild": {},
     "Complete Vvardenfell Mages Guild": {},
     "Complete Vvardenfell Thieves Guild": {},
@@ -722,29 +732,130 @@ const ObjectivesType = Object.freeze({
     "Complete Ordinators": {},
     "Complete East Empire Company": {},
     "Complete Ja'Natta Syndicate": {},
-    "Complete Cyrodiil + Skyrim Fighters Guild": {},
+/*    "Complete Cyrodiil + Skyrim Fighters Guild": {},
     "Complete Cyrodiil + Skyrim Mages Guild": {},
     "Complete Cyrodiil + Skyrim Thieves Guild": {},
     "Complete Kingdom of Anvil": {},
-    "Complete the Abecette Fight Pit, Narsis Arena, and Dragonstar Arena": {},
-    "Complete ${faction}": {},
-    "Collect all artifacts mentioned in the book 'Tamrielic Lore'.": {},
-    "Collect all unique Axes": {"hasSkill":[SkillsType.AXE]},
-    "Collect all unique Bows and Crossbows": {"hasSkill":[SkillsType.MARKSMAN]},
-    "Collect all unique Blunt Weapons": {"hasSkill":[SkillsType.SPEAR]},
-    "Collect all unique Long Blades": {"hasSkill":[SkillsType.LONG_BLADE]},
-    "Collect all unique Short Blades": {"hasSkill":[SkillsType.SHORT_BLADE]},
-    "Collect all unique Spears": {"hasSkill":[SkillsType.SPEAR]},
+    "Complete the Abecette Fight Pit, Narsis Arena, and Dragonstar Arena": {}, */
 });
+
+const UnfilteredCollectionObjectivesType = Object.freeze({
+    "Collect all artifacts mentioned in the book 'Tamrielic Lore'": {},
+    "Collect all 36 Lessons of Vivec": {},
+    "Collect all Daedric Weapons and Armor": {},
+    "Collect all House Dagoth Souls": {},
+    "Collect all unique enchanted Robes": {},
+    "Collect all unique enchanted Shirts": {},
+    "Collect all unique enchanted Pants": {},
+    "Collect all ring artifacts": {},
+    "Collect all amulet artifacts": {},
+    "Collect all unique enchanted Shoes": {"hasSkill":[SkillsType.UNARMORED], "notHasRace":[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
+    "Collect Master, then Grandmaster, then SecretMaster Alchemy Apparatus": {"hasSkill":[SkillsType.ALCHEMY]},
+    "Create a custom CE enchant on every equipment slot": {"hasSkill":[SkillsType.ENCHANT]},
+});
+
+const CollectionObjectivesType = Object.freeze({
+    "Collect all unique Axes": {"hasSkill":[SkillsType.AXE],"hasRace":[RacesType.ORC, RacesType.NORD, RacesType.REDGUARD, RacesType.MALAHK_ORC, RacesType.CHIMERI_QUEY]},
+    "Collect all unique Bows and Crossbows": {"hasSkill":[SkillsType.MARKSMAN], "hasRace":[RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.YNESAI, RacesType.RIVERFOLK]},
+    "Collect all unique Blunt Weapons": {"hasSkill":[SkillsType.BLUNT_WEAPON], "hasRace":[RacesType.NORD, RacesType.IMPERIAL, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.TOJAY, RacesType.NAGA]},
+    "Collect all unique Long Blades": {"hasSkill":[SkillsType.LONG_BLADE], "hasRace":[RacesType.REDGUARD, RacesType.IMPERIAL, RacesType.DARK_ELF, RacesType.NORD, RacesType.CATHAY_RAHT, RacesType.CATHAY, RacesType.RIVERFOLK]},
+    "Collect all unique Short Blades": {"hasSkill":[SkillsType.SHORT_BLADE], "hasRace":[RacesType.DARK_ELF, RacesType.KHAJIIT, RacesType.REDGUARD, RacesType.YNESAI, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.OHMES, RacesType.SUTHAY]},
+    "Collect all unique Spears": {"hasSkill":[SkillsType.SPEAR], "hasRace":[RacesType.ARGONIAN, RacesType.NORD, RacesType.AYLEID, RacesType.SEA_ELF, RacesType.CATHAY, RacesType.DUADRI]},
+    "Collect all unique Shields": {"hasSkill":[SkillsType.BLOCK], "hasRace":[RacesType.ORC, RacesType.KEPTU_QUEY, RacesType.RIVERFOLK, RacesType.BRETON]},
+    "Collect all Heavy Armor artifacts": {"hasSkill":[SkillsType.HEAVY_ARMOR], "hasRace":[RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.MALAHK_ORC]},
+    "Collect all Medium Armor artifacts": {"hasSkill":[SkillsType.MEDIUM_ARMOR], "hasRace":[RacesType.ARGONIAN, RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.MALAHK_ORC]},
+    "Collect all Light Armor artifacts": {"hasSkill":[SkillsType.LIGHT_ARMOR], "hasRace":[RacesType.KHAJIIT, RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.IMPERIAL, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.DUADRI, RacesType.OHMES, RacesType.OHMES_RAHT, RacesType.SUTHAY]},
+    "Collect all unique enchanted Shoes": {"hasSkill":[SkillsType.UNARMORED], "notHasRace":[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
+    "Reach 100 in the Alteration skill and learn all standard Alteration spells": {"hasSkill":[SkillsType.ALTERATION], "hasRace":[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.NAGA, RacesType.REACHMAN, RacesType.SEA_ELF]},
+    "Reach 100 in the Conjuration skill and learn all standard Conjuration spells": {"hasSkill":[SkillsType.CONJURATION], "hasRace":[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.CHIMERI_QUEY, RacesType.REACHMAN]},
+    "Reach 100 in the Destruction skill and learn all standard Destruction spells": {"hasSkill":[SkillsType.DESTRUCTION], "hasRace":[RacesType.HIGH_ELF, RacesType.DARK_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.REACHMAN, RacesType.SEA_ELF]},
+    "Reach 100 in the Illusion skill and learn all standard Illusion spells": {"hasSkill":[SkillsType.ILLUSION], "hasRace":[RacesType.ARGONIAN, RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.OHMES_RAHT, RacesType.SEA_ELF, RacesType.YNESAI]},
+    "Reach 100 in the Mysticism skill and learn all standard Mysticism spells": {"hasSkill":[SkillsType.MYSTICISM], "hasRace":[RacesType.BRETON, RacesType.ARGONIAN, RacesType.DARK_ELF, RacesType.CHIMERI_QUEY, RacesType.DUADRI]},
+    "Reach 100 in the Restoration skill and learn all standard Restoration spells": {"hasSkill":[SkillsType.RESTORATION], "hasRace":[RacesType.BRETON, RacesType.NAGA, RacesType.TOJAY]},
+});
+
+const MercantileStipulationsType = Object.freeze({
+    "Can't sell things for more than 1000 gold": {"notHaveStipulation":["Can't sell"]},
+    "Can't sell things worth more than 1000 gold": {"notHaveStipulation":["Can't sell"]},
+    "Can't sell things worth less than 1000 gold": {"notHaveStipulation":["Can't sell"]},
+    "All sales final": {},
+});
+
+const GeographicStipulationsType = Object.freeze({
+    "No Fast Travel services": {},
+    "No Teleportation Magic": {"notHasSkill":[SkillsType.MYSTICISM]},
+    "Start in Gnaar Mok": {"notHaveStipulation":["Start in"]},
+    "Start in Hla Oad": {"notHaveStipulation":["Start in"]},
+    "Start in Gnisis": {"notHaveStipulation":["Start in"]},
+    "Start in Dagon Fel": {"notHaveStipulation":["Start in"]},
+    "Start in Tel Fyr": {"notHaveStipulation":["Start in"]},
+    "Start in Sadrith Mora": {"notHaveStipulation":["Start in"]},
+    "Start in Firewatch": {"notHaveStipulation":["Start in"]},
+    "Start in Narsis": {"notHaveStipulation":["Start in"]},
+    "Start in Port Telvannis": {"notHaveStipulation":["Start in"]},
+    "Start in Nanaav": {"notHaveStipulation":["Start in"]},
+    "Start in Ald Iuval": {"notHaveStipulation":["Start in"]},
+/*    "Start in Anvil": {"notHaveStipulation":["Start in"]},
+    "Start in Dragonstar": {"notHaveStipulation":["Start in"]},
+*/
+});
+
+const LevellingStipulationsType = Object.freeze({
+    "No Buying Training + No Training Spells": {},
+    "Only train 5 times per character level": {},
+    "Level 10 cap": {"notHaveStipulation":["Level 15 cap"]},
+    "Level 15 cap": {"notHaveStipulation":["Level 10 cap"]},
+    "Must level up when able": {},
+})
+
+const SkillsStipulationsType = Object.freeze({
+    "Only use major skills from class": {"notHaveStipulation":["skills from class"]},
+    "Only use skills from class": {"notHaveStipulation":["skills from class"]},
+    "Cannot use skills from class": {"notHaveStipulation":["skills from class"]},
+})
+
+const CrimeStipulationsType = Object.freeze({
+    "No stealing": {"notHasSkill":[SkillsType.SNEAK],"notHasObjective":["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu"]},
+    "No murdering": {"notHasObjective":["Morag Tong", "Ja-Natta Syndicate", "House Hlaalu", "House Telvanni", "Ordinators"]},
+    "No bribing": {"notHasSkill":[SkillsType.MERCANTILE], "notHasObjective":["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "East Empire Company"]},
+    "Ethical actions only": {"hasObjective":["Imperial Cult", "Temple", "Imperial Legion", "House Redoran"]},
+    "No opening locks (unless required to satisfy objective)": {"notHasSkill":[SkillsType.SECURITY]}
+})
+
+const GearStipulationsType = Object.freeze({
+    "No meta knowledge (i.e. don't go somewhere just to get gear)": {},
+    "Can only use gear you bought": {"notHaveStipulation":["Can only use gear"]},
+    "Can only use gear you were given in a quest": {"notHaveStipulation":["Can only use gear"]},
+    "Can't use weapons": {"notHaveStipulation":["skills from class"]},
+})
+
+const PersuasionStipulationsType = Object.freeze({
+    "Must intimidate to persuade": {},
+    "No bribing": {"notHasSkill":[SkillsType.MERCANTILE]},
+    "No taunting": {},
+})
+
+const MagicStipulationsType = Object.freeze({
+    "No casting spells (enchantments and potions are allowed)": {"notHasSpecialization":[SpecializationType.MAGIC]},
+    "No pre-made potions": {},
+    "No self-made potions": {"notHasSkill":[SkillsType.ALCHEMY]},
+    "No scrolls": {},
+    "No cast-when-used enchantments": {},
+    "No cast-on-strike enchantments": {},
+    "No constant effect enchantments": {},
+    "Can only used custom enchantments": {},
+    "No summons from enchantments": {},
+    "No summons": {"notHasSkill":[SkillsType.CONJURATION]}
+})
+
+const MiscellaneousStipulationsType = Object.freeze({
+    "No Seyda Neen": {},
+    "No cancelling Dark Brotherhood attacks": {},
+    "No waiting to restore health/magicka (Fatigue in cities is OK)": {},
+})
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
-}
-
-function randomizeRace() {
-    let races = Object.values(RacesType);
-    let random = getRandomInt(races.length);
-    document.getElementById("race").textContent = races[random];
 }
 
 function addLiChildren(node, list) {
@@ -758,12 +869,81 @@ function addLiChildren(node, list) {
     });
 }
 
+function validateConditions(conditions) {
+    // Whitelist
+    if ("hasSkill" in conditions &&
+        !conditions.hasSkill.some(skill => classSkills.includes(skill))) {
+        console.log("Failed condition hasSkill");
+        return false;
+    }
+    if ("hasRace" in conditions &&
+        !conditions.hasRace.includes(race)) {
+        console.log("Failed condition hasRace");
+        return false;
+    }
+    if ("hasSpecialization" in conditions &&
+        !conditions.hasSpecialization.includes(classSpecialization)) {
+        console.log("Failed condition hasSpecialization");
+        return false;
+    }
+    if ("hasObjective" in conditions &&
+        !conditions.hasObjective.some(allowed => objective.includes(allowed))) {
+        console.log("Failed condition hasObjective");
+        return false;
+    }
+
+    // Blacklist
+    if ("notHasSkill" in conditions &&
+        conditions.notHasSkill.some(skill => classSkills.includes(skill))) {
+        console.log("Failed condition notHasSkill");
+        return false;
+    }
+    if ("notHasRace" in conditions &&
+        conditions.notHasRace.includes(race)) {
+        console.log("Failed condition notHasRace");
+        return false;
+    }
+    if ("notHasSpecialization" in conditions &&
+        conditions.notHasSpecialization.includes(classSpecialization)) {
+        console.log("Failed condition notHasSpecialization");
+        return false;
+    }
+    if ("notHasObjective" in conditions &&
+        conditions.notHasObjective.some(disallowed => objective.includes(disallowed))) {
+        console.log("Failed condition notHasObjective");
+        return false;
+    }
+    if ("notHasStipulation" in conditions &&
+        conditions.notHasObjective.some(disallowed => objective.includes(disallowed))) {
+        console.log("Failed condition notHasStipulation");
+        return false;
+    }
+    return true;
+}
+
+function randomizeRace() {
+    // Todo - Need to cleanup and reset the other fields when clicking this
+
+    let races = Object.values(RacesType);
+    let random = getRandomInt(races.length);
+
+    // Set the globals
+    race = races[random]
+
+    document.getElementById("race").textContent = race;
+}
+
 function randomizeClass() {
     let classes = Object.values(ClassesType);
     let random = getRandomInt(classes.length);
     let myclass = classes[random];
 
-    document.getElementById("class-name").textContent = myclass.name;
+    // Set the globals
+    className = myclass.name;
+    classSpecialization = myclass.specialization;
+    classSkills = myclass.majors.concat(myclass.minors)
+
+    document.getElementById("class-name").textContent = className;
     document.getElementById("class-specialization").textContent = myclass.specialization;
     addLiChildren(document.getElementById("class-attributes"), myclass.attributes);
     addLiChildren(document.getElementById("class-major-skills"), myclass.majors);
@@ -777,11 +957,88 @@ function randomizeBirthsign() {
 }
 
 function randomizeObjective() {
+    let random = getRandomInt(100);
+    let objectiveType;
+    if (random >= 50) {
+        objectiveType = FactionObjectivesType;
+    } else if (random >= 20) {
+        objectiveType = GeographicObjectivesType;
+    } else {
+        objectiveType = CollectionObjectivesType;
+    }
+    let validObjectives = [];
+    let keys = Object.keys(objectiveType);
+    for(var i = 0; i < keys.length; i++){
+        let thisObj = keys[i];
+        console.log("Evaluating objective " + thisObj);
+        if( validateConditions(objectiveType[thisObj]) )
+        {
+            validObjectives.push(thisObj);
+        }
+    }
+    if( (validObjectives.length == 0) && objectiveType == CollectionObjectivesType){
+        validObjectives = validObjectives.concat(Object.keys(UnfilteredCollectionObjectivesType));
+    }
+    random = getRandomInt(validObjectives.length);
+    objective = validObjectives[random];
+    document.getElementById("objective").textContent = objective;
+}
 
+function getStipulation() {
+    let random = getRandomInt(100);
+    let stipulationType;
+    if (random >= 90) {
+        stipulationType = MercantileStipulationsType;
+    } else if (random >= 80) {
+        stipulationType = GeographicStipulationsType;
+
+    } else if (random >= 70) {
+        stipulationType = LevellingStipulationsType;
+        
+    } else if (random >= 60) {
+        stipulationType = SkillsStipulationsType;
+        
+    } else if (random >= 50) {
+        stipulationType = CrimeStipulationsType;
+        
+    } else if (random >= 40) {
+        stipulationType = GearStipulationsType;
+        
+    } else if (random >= 30) {
+        stipulationType = PersuasionStipulationsType;
+        
+    } else if (random >= 20) {
+        stipulationType = MiscellaneousStipulationsType;
+        
+    } else {
+        stipulationType = MagicStipulationsType;
+    }
+    let validStipulations = [];
+    let keys = Object.keys(stipulationType);
+    for(var i = 0; i < keys.length; i++){
+        thisStip = keys[i];
+        console.log("Evaluating stipulation " + thisStip);
+        if( validateConditions(stipulationType[thisStip]) )
+        {
+            validStipulations.push(thisStip);
+        }
+    }
+    random = getRandomInt(validStipulations.length);
+    return validStipulations[random];
 }
 
 function randomizeStipulations() {
-
+    stipulations = [];
+    let targetNumStipulations = 2 + getRandomInt(3); 
+    let actualStipulations = 0;
+    while( actualStipulations < targetNumStipulations ) {
+        thisStip = getStipulation();
+        if(!stipulations.includes(thisStip)){
+            stipulations.push(thisStip);
+            actualStipulations++;
+        }
+    }
+    addLiChildren(document.getElementById("stipulations"), stipulations);
 }
 
 function init() {
