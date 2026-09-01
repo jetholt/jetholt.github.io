@@ -1,6 +1,7 @@
 :root {
 	--titles: #d6c3a1;
     --gold: #d4ae65;
+    --line-height: 1.1em;
 }
 @font-face{font-family:Pelagiad;src:url(/assets/fonts/Pelagiad.ttf)}
 body{
@@ -10,11 +11,11 @@ body{
     background-color: #000000;
     justify-content: center;
     display: flex;
+    line-height: var(--line-height);
 }
 .app{
     width: 50em;
 }
-
 .wrapper{
     position: relative;
     padding: 10px;
@@ -52,16 +53,13 @@ input {
     margin: 10px;
 }
 #race, #class-name, #class-specialization, #birthsign, #objective {
-    height: 32px;
+    height: calc(var(--line-height));
 }
 #class-attributes {
-    height: 64px
+    height: calc(var(--line-height) * 2);
 }
-#class-major-skills {
-    height: 160px;
-}
-#class-minor-skills {
-    height: 160px;
+#class-major-skills, #class-minor-skills {
+    height: calc(var(--line-height) * 5);
 }
 
 #class-wrapper{
