@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'jekyll'
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-gem 'github-pages'
+gem 'jekyll-include-cache'
+gem 'liquid-c'
+gem 'sassc'
+gem 'jemoji'
+gem 'jekyll-sitemap'
+gem 'jekyll-paginate'
+gem 'jekyll-redirect-from'
+gem "webrick"
