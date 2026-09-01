@@ -1,4 +1,69 @@
+:root {
+	--titles: #d6c3a1;
+    --gold: #d4ae65;
+}
+@font-face{font-family:Pelagiad;src:url(/assets/fonts/Pelagiad.ttf)}
 body{
+	font-family: Pelagiad;
+    color: var(--gold);
+    font-size: 32px;
     background-color: #000000;
-    color: #d4ae65;
+    justify-content: center;
+    display: flex;
+}
+.app{
+    width: 50em;
+}
+
+.wrapper{
+    position: relative;
+    padding: 10px;
+    margin: 10px;
+    min-width: 300px;
+}
+label {
+    color: var(--titles);
+}
+input {
+    width: 28px;
+    position: absolute;
+    left: -40px;
+    top: 15px;
+    --left: -40px;
+    left: var(--left);
+    --top: 15px;
+    top: var(--top);
+
+    &:hover {
+        top: calc(var(--top) + 1px);
+    }
+    &:active {
+        top: calc(var(--top) + 2px);
+        left: calc(var(--left) + 1px);
+    }
+}
+
+#class-attributes, #class-major-skills, #class-minor-skills {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+#race, #class-name, #class-specialization, #birthsign, #objective,
+#class-attributes, #class-major-skills, #class-minor-skills {
+    margin: 10px;
+}
+#race, #class-name, #class-specialization, #birthsign, #objective {
+    height: 32px;
+}
+#class-attributes {
+    height: 64px
+}
+#class-major-skills {
+    height: 160px;
+}
+#class-minor-skills {
+    height: 160px;
+}
+
+#class-wrapper{
+    border: 1px solid var(--gold)
 }
