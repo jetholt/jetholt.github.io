@@ -27,11 +27,9 @@ label {
 input {
     width: 28px;
     position: absolute;
-    left: -40px;
-    top: 15px;
     --left: -40px;
     left: var(--left);
-    --top: 15px;
+    --top: 25px;
     top: var(--top);
 
     &:hover {
