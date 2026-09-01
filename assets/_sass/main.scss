@@ -1,6 +1,4 @@
-nav {
-	@extend .navbar, .navbar-inverse, .navbar-fixed-top;
-	button { @extend .navbar-toggle; }
-	#menu { @extend .collapse, .navbar-collapse; }
-  ul { @extend .nav, .navbar-nav; }
+@font-face{font-family:Pelagiad;src:url(/assets/fonts/Pelagiad.ttf)}
+body{
+	font-family: Pelagiad;
 }
