@@ -396,8 +396,8 @@ const ClassesType = Object.freeze({
         "majors": [SkillsType.SPEECHCRAFT, SkillsType.MERCANTILE, SkillsType.RESTORATION, SkillsType.ARMORER, SkillsType.SECURITY],
         "minors": [SkillsType.LIGHT_ARMOR, SkillsType.UNARMORED, SkillsType.BLUNT_WEAPON, SkillsType.LONG_BLADE, SkillsType.MEDIUM_ARMOR]
     },
-    "Ore Miner": {
-        "name": "Ore Miner",
+    "Miner": {
+        "name": "Miner",
         "specialization": SpecializationType.COMBAT,
         "attributes": [AttributesType.STRENGTH, AttributesType.ENDURANCE],
         "majors": [SkillsType.BLOCK, SkillsType.BLUNT_WEAPON, SkillsType.AXE, SkillsType.UNARMORED, SkillsType.LIGHT_ARMOR],
@@ -626,13 +626,6 @@ const ClassesType = Object.freeze({
         "attributes": [AttributesType.STRENGTH, AttributesType.WILLPOWER],
         "majors": [SkillsType.HEAVY_ARMOR, SkillsType.BLUNT_WEAPON, SkillsType.ENCHANT, SkillsType.BLOCK, SkillsType.RESTORATION],
         "minors": [SkillsType.ALTERATION, SkillsType.MEDIUM_ARMOR, SkillsType.ATHLETICS, SkillsType.LONG_BLADE, SkillsType.ARMORER]
-    },
-    "Miner": {
-        "name": "Miner",
-        "specialization": SpecializationType.COMBAT,
-        "attributes": [AttributesType.STRENGTH, AttributesType.ENDURANCE],
-        "majors": [SkillsType.ARMORER, SkillsType.BLOCK, SkillsType.AXE, SkillsType.BLUNT_WEAPON, SkillsType.UNARMORED],
-        "minors": [SkillsType.LONG_BLADE, SkillsType.SPEAR, SkillsType.LIGHT_ARMOR, SkillsType.HAND_TO_HAND, SkillsType.HEAVY_ARMOR]
     },
     "Naturalist": {
         "name": "Naturalist",
