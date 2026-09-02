@@ -745,10 +745,13 @@ const FactionObjectivesType = Object.freeze({
     "Complete Cyrodiil + Skyrim Mages Guild": {},
     "Complete Cyrodiil + Skyrim Thieves Guild": {},
     "Complete Kingdom of Anvil": {},
-    "Complete the Abecette Fight Pit, Narsis Arena, and Dragonstar Arena": {}, */
+    "Complete the Abecette Fight Pit, Narsis Arena, and Dragonstar Arena": {},
+    "Complete Itinerant Priests": {},
+    "Complete all bounties in Morrowind, Cyrodiil, and Skyrim": {}, */
 });
 
 const UnfilteredCollectionObjectivesType = Object.freeze({
+    "Visit every settlement": {},
     "Collect all artifacts mentioned in the book 'Tamrielic Lore'": {},
     "Collect all 36 Lessons of Vivec": {},
     "Collect all Daedric Weapons and Armor": {},
@@ -758,6 +761,7 @@ const UnfilteredCollectionObjectivesType = Object.freeze({
     "Collect all unique enchanted Pants": {},
     "Collect all ring artifacts": {},
     "Collect all amulet artifacts": {},
+    "Collect all propylon indexes on Vvardenfell": {},
     "Collect all unique enchanted Shoes": {[ConditionType.NOT_HAS_RACE]:[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
     "Create a custom CE enchant on every equipment slot": {[ConditionType.HAS_SKILL]:[SkillsType.ENCHANT]},
 });
@@ -787,82 +791,133 @@ const MercantileStipulationsType = Object.freeze({
     "Can't sell things worth more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
     "Can't sell things worth less than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
     "All sales final": {},
+    "Can't use the same merchant twice": {},
+    "Can't sell drugs": {[ConditionType.NOT_HAS_OBJECTIVE]:["Ja'Natta Syndicate", "Thieves Guild"]},
+    "Can't sell stolen goods": {[ConditionType.NOT_HAS_OBJECTIVE]:["Ja'Natta Syndicate", "Thieves Guild"]},
 });
 
 const GeographicStipulationsType = Object.freeze({
-    "No fast travel services": {[ConditionType.NOT_HAS_STIPULATION]:["No teleportation magic"]},
-    "No teleportation magic": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MYSTICISM], [ConditionType.NOT_HAS_STIPULATION]:["No fast travel services"]},
-    "Start in Gnaar Mok": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Hla Oad": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Gnisis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Dagon Fel": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Tel Fyr": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Sadrith Mora": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Firewatch": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Narsis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Port Telvannis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Nanaav": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Ald Iuval": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-/*    "Start in Anvil": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
-    "Start in Dragonstar": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Gnaar Mok": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Hla Oad": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Gnisis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Urshilaku Camp": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Erabenimsun Camp": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Dagon Fel": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Tel Fyr": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Molag Mar": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Sadrith Mora": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Nivalis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Firewatch": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Port Telvannis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Helnim": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Marog": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Gorne": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Darvonis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Sailen": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Nan Iban": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Bosmora": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Dreynim Spa": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Bisandryon": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Othrenis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Nanaav": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Ald Iuval": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Sadrathim": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Narsis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Bal Foyen": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Almas Thirr": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Bodrum": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Stormgate Pass": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Septim's Gate Pass": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Gan-Ettu Camp": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Yandaran": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Ishanuran Camp": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+/*    "Start in Anvil": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Brina Cross": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Charach": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Salthearth": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Archad": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Gosha Inn": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Garlas Agea": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Santaral Osi's House": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"], [ConditionType.HAS_SKILL]:[SkillType.ALTERATION]},
+    "Start in Dragonstar": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Karthgad": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Karthwasten": {[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
 */
 });
 
 const LevellingStipulationsType = Object.freeze({
-    "No buying training + No training spells": {},
+    "No buying training + No training spells": {[ConditionType.NOT_HAS_OBJECTIVE]:["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"]},
     "Only train 5 times per character level": {},
     "Level 10 cap": {[ConditionType.NOT_HAS_STIPULATION]:["Level 15 cap"]},
     "Level 15 cap": {[ConditionType.NOT_HAS_STIPULATION]:["Level 10 cap"]},
     "Must level up when able": {},
+    "Throw all your gold on the ground when levelling up": {},
 });
 
 const SkillsStipulationsType = Object.freeze({
-    "Only use major skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training"]},
-    "Only use skills from class": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training"]},
-    "Cannot use skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"], [ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training"]},
+    "Only use major skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training", "cycle between weapon types", "Can't use weapons"]},
+    "Only use skills from class": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training", "cycle between weapon types", "Can't use weapons"]},
+    "Cannot use skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"], [ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training", "cycle between weapon types", "Can't use weapons"]},
+    "Skills must be at least 20 to be used": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
+    "Must haggle every transaction": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
+    "Can only heal from self-made potions": {[ConditionType.HAS_SKILL]:[SkillsType.ALCHEMY], [ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
+    "Try to sneak attack every enemy": {[ConditionType.HAS_SKILL]:[SkillsType.SNEAK], [ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
+    "Must use NPCs to repair": {[ConditionType.NOT_HAS_SKILL]:["Armorer"]},
+    "Must cast detect key before unlocking": {[ConditionType.HAS_SKILL]:[SkillsType.MYSTICISM],[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]}
 });
 
 const CrimeStipulationsType = Object.freeze({
+    "No tresspassing": {[ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "Morag Tong", "House Telvanni"]},
     "No stealing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SNEAK],[ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu"]},
     "No murdering": {[ConditionType.NOT_HAS_OBJECTIVE]:["Morag Tong", "Ja-Natta Syndicate", "House Hlaalu", "House Telvanni", "Ordinators"]},
     "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE], [ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "East Empire Company"]},
     "Ethical actions only": {[ConditionType.HAS_OBJECTIVE]:["Imperial Cult", "Temple", "Imperial Legion", "House Redoran"]},
-    "No opening locks (unless required to satisfy objective)": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SECURITY]}
+    "No opening locks (unless required to satisfy objective)": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SECURITY]},
 });
 
 const GearStipulationsType = Object.freeze({
     "No meta knowledge (i.e. don't go somewhere just to get gear)": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"]},
     "Can only use gear you bought": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can only use gear", "Can only use custom enchantments"]},
     "Can only use gear you were given in a quest": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can only use gear", "Can only use custom enchantments"]},
-    "Can't use weapons": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
-});
-
-const PersuasionStipulationsType = Object.freeze({
-    "Must intimidate to persuade": {},
-    "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE]},
-    "No taunting": {},
+    "Can't use weapons": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "cycle between weapon types"]},
+    "Must cycle between weapon types every kill": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "Can't use weapons"]},
+    "Can't use Daedric, Glass, or Ebony gear": {[ConditionType.NOT_HAS_OBJECTIVE]:["Daedric"]},
+    "Must use throwing weapons": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can't use weapons","skills from class"],[ConditionType.HAS_SKILL]:[SkillsType.MARKSMAN]},
+    "Cannot go above 50% encumberance": {},
+    "Can't carry money when outside of town": {},
 });
 
 const MagicStipulationsType = Object.freeze({
-    "No casting spells (enchantments and potions are allowed)": {[ConditionType.NOT_HAS_SPECIALIZATION]:[SpecializationType.MAGIC], [ConditionType.NOT_HAS_OBJECTIVE]:["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"]},
+    "No casting spells (scrolls and enchantments are allowed)": {[ConditionType.NOT_HAS_SPECIALIZATION]:[SpecializationType.MAGIC], [ConditionType.NOT_HAS_OBJECTIVE]:["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"], [ConditionType.NOT_HAS_STIPULATION]:["enchantments", "scrolls"]},
     "No pre-made potions": {},
     "No self-made potions": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.ALCHEMY]},
     "No scrolls": {},
-    "No cast-when-used enchantments": {},
-    "No cast-on-strike enchantments": {},
-    "No constant effect enchantments": {},
+    "No cast-when-used enchantments": {[ConditionType.NOT_HAS_STIPULATION]:["enchantments"]},
+    "No cast-on-strike enchantments": {[ConditionType.NOT_HAS_STIPULATION]:["enchantments"]},
+    "No constant effect enchantments": {[ConditionType.NOT_HAS_OBJECTIVE]:["Create a custom CE enchant"], [ConditionType.NOT_HAS_STIPULATION]:["enchantments"]},
     "Can only use custom enchantments": {},
-    "No summons from enchantments": {},
-    "No summons": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.CONJURATION]}
+    "No summons from enchantments": {[ConditionType.NOT_HAS_STIPULATION]:["No summons", "Cannot summon"]},
+    "No summons": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.CONJURATION],[ConditionType.NOT_HAS_STIPULATION]:["No summons", "Cannot summon"]},
+    "No spellmaking": {[ConditionType.NOT_HAS_STIPULATION]:["No casting spells"]},
 });
 
 const MiscellaneousStipulationsType = Object.freeze({
-    "No Seyda Neen": {},
+    "Must intimidate to persuade": {},
+    "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE]},
+    "No taunting": {},
+    "No fast travel services": {[ConditionType.NOT_HAS_STIPULATION]:["No teleportation magic"]},
+    "No teleportation magic": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MYSTICISM], [ConditionType.NOT_HAS_STIPULATION]:["No fast travel services"]},
+    "No Seyda Neen": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
     "No cancelling Dark Brotherhood attacks": {},
     "No waiting to restore health/magicka (Fatigue in cities is OK)": {},
+    "Must attempt to calm every hostile NPC/creature": {[ConditionType.HAS_SKILL]:["Illusion"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
     "Must get a blessing from every shrine you see": {},
+    "Must rest in a bed when in town at night": {},
+    "Must consume food before starting a quest": {},
     "Cannot use your powers": {[ConditionType.HAS_RACE]:[RacesType.REDGUARD, RacesType.DARK_ELF, RacesType.ORC, RacesType.DUADRI, RacesType.MALAHK_ORC, RacesType.SEA_ELF]},
-    "Cannot summon Ancestor Ghost": {[ConditionType.HAS_BIRTHSIGN]:[BirthsignType.ATRONACH]}
+    "Cannot summon Ancestor Ghost": {[ConditionType.HAS_BIRTHSIGN]:[BirthsignType.ATRONACH], [ConditionType.NOT_HAS_STIPULATION]:["No summons"]},
+    "Cannot join factions (unless required to meet objective)": {},
+    "Where's you uniform? Dress like you belong in any faction you join.": {},
 });
 
 function getRandomInt(max) {
@@ -1026,23 +1081,15 @@ function getStipulation() {
         stipulationType = MercantileStipulationsType;
     } else if (random >= 80) {
         stipulationType = GeographicStipulationsType;
-
     } else if (random >= 70) {
         stipulationType = LevellingStipulationsType;
-        
     } else if (random >= 60) {
         stipulationType = SkillsStipulationsType;
-        
     } else if (random >= 50) {
         stipulationType = CrimeStipulationsType;
-        
-    } else if (random >= 40) {
+    } else if (random >= 35) {
         stipulationType = GearStipulationsType;
-        
-    } else if (random >= 30) {
-        stipulationType = PersuasionStipulationsType;
-        
-    } else if (random >= 20) {
+    } else if (random >= 15) {
         stipulationType = MiscellaneousStipulationsType;
         
     } else {
