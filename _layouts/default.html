@@ -3,7 +3,15 @@ layout: compress
 ---
 <!DOCTYPE html>
 <html>
-  	{% include head.html %}
+  	<head>
+		{% assign cacheBust = site.time | date:'?v=%s' %}
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<meta name='description' content='{{ site.description }}'>
+		<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+		<link href='{{ site.baseurl }}/assets/app.css{{ cacheBust }}' rel='stylesheet' type='text/css'>
+	</head>
   	<body>
   	{{ content }}
 	</body>

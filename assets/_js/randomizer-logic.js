@@ -1,5 +1,6 @@
 // Global variables
 var globalRace = "";
+var globalBirthsign = "";
 var globalClassName = "";
 var globalClassSpecialization = "";
 var globalClassSkills = [];
@@ -691,6 +692,21 @@ const ClassesType = Object.freeze({
     }
 })
 
+const ConditionType = Object.freeze({
+    HAS_SKILL: "hasSkill",
+    HAS_RACE: "hasRace",
+    HAS_BIRTHSIGN: "hasBirthsign",
+    HAS_SPECIALIZATION: "hasSpecialization",
+    HAS_OBJECTIVE: "hasObjective",
+    HAS_STIPULATION: "hasStipulation",
+    NOT_HAS_SKILL: "notHasSkill",
+    NOT_HAS_RACE: "notHasRace",
+    NOT_HAS_BIRTHSIGN: "notHasBirthsign",
+    NOT_HAS_SPECIALIZATION: "notHasSpecialization",
+    NOT_HAS_OBJECTIVE: "notHasObjective",
+    NOT_HAS_STIPULATION: "notHasStipulation"
+})
+
 const GeographicObjectivesType = Object.freeze({
     "Complete all miscellaneous quests and dungeons in Bitter Coast + Ascadian Isles": {},
     "Complete all miscellaneous quests and dungeons in West Gash + Sheogorad": {},
@@ -749,103 +765,102 @@ const UnfilteredCollectionObjectivesType = Object.freeze({
     "Collect all unique enchanted Pants": {},
     "Collect all ring artifacts": {},
     "Collect all amulet artifacts": {},
-    "Collect all unique enchanted Shoes": {"hasSkill":[SkillsType.UNARMORED], "notHasRace":[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
-    "Collect Master, then Grandmaster, then SecretMaster Alchemy Apparatus": {"hasSkill":[SkillsType.ALCHEMY]},
-    "Create a custom CE enchant on every equipment slot": {"hasSkill":[SkillsType.ENCHANT]},
+    "Collect all unique enchanted Shoes": {[ConditionType.NOT_HAS_RACE]:[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
+    "Create a custom CE enchant on every equipment slot": {[ConditionType.HAS_SKILL]:[SkillsType.ENCHANT]},
 });
 
 const CollectionObjectivesType = Object.freeze({
-    "Collect all unique Axes": {"hasSkill":[SkillsType.AXE],"hasRace":[RacesType.ORC, RacesType.NORD, RacesType.REDGUARD, RacesType.MALAHK_ORC, RacesType.CHIMERI_QUEY]},
-    "Collect all unique Bows and Crossbows": {"hasSkill":[SkillsType.MARKSMAN], "hasRace":[RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.YNESAI, RacesType.RIVERFOLK]},
-    "Collect all unique Blunt Weapons": {"hasSkill":[SkillsType.BLUNT_WEAPON], "hasRace":[RacesType.NORD, RacesType.IMPERIAL, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.TOJAY, RacesType.NAGA]},
-    "Collect all unique Long Blades": {"hasSkill":[SkillsType.LONG_BLADE], "hasRace":[RacesType.REDGUARD, RacesType.IMPERIAL, RacesType.DARK_ELF, RacesType.NORD, RacesType.CATHAY_RAHT, RacesType.CATHAY, RacesType.RIVERFOLK]},
-    "Collect all unique Short Blades": {"hasSkill":[SkillsType.SHORT_BLADE], "hasRace":[RacesType.DARK_ELF, RacesType.KHAJIIT, RacesType.REDGUARD, RacesType.YNESAI, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.OHMES, RacesType.SUTHAY]},
-    "Collect all unique Spears": {"hasSkill":[SkillsType.SPEAR], "hasRace":[RacesType.ARGONIAN, RacesType.NORD, RacesType.AYLEID, RacesType.SEA_ELF, RacesType.CATHAY, RacesType.DUADRI]},
-    "Collect all unique Shields": {"hasSkill":[SkillsType.BLOCK], "hasRace":[RacesType.ORC, RacesType.KEPTU_QUEY, RacesType.RIVERFOLK, RacesType.BRETON]},
-    "Collect all Heavy Armor artifacts": {"hasSkill":[SkillsType.HEAVY_ARMOR], "hasRace":[RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.MALAHK_ORC]},
-    "Collect all Medium Armor artifacts": {"hasSkill":[SkillsType.MEDIUM_ARMOR], "hasRace":[RacesType.ARGONIAN, RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.MALAHK_ORC]},
-    "Collect all Light Armor artifacts": {"hasSkill":[SkillsType.LIGHT_ARMOR], "hasRace":[RacesType.KHAJIIT, RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.IMPERIAL, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.DUADRI, RacesType.OHMES, RacesType.OHMES_RAHT, RacesType.SUTHAY]},
-    "Collect all unique enchanted Shoes": {"hasSkill":[SkillsType.UNARMORED], "notHasRace":[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
-    "Reach 100 in the Alteration skill and learn all standard Alteration spells": {"hasSkill":[SkillsType.ALTERATION], "hasRace":[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.NAGA, RacesType.REACHMAN, RacesType.SEA_ELF]},
-    "Reach 100 in the Conjuration skill and learn all standard Conjuration spells": {"hasSkill":[SkillsType.CONJURATION], "hasRace":[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.CHIMERI_QUEY, RacesType.REACHMAN]},
-    "Reach 100 in the Destruction skill and learn all standard Destruction spells": {"hasSkill":[SkillsType.DESTRUCTION], "hasRace":[RacesType.HIGH_ELF, RacesType.DARK_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.REACHMAN, RacesType.SEA_ELF]},
-    "Reach 100 in the Illusion skill and learn all standard Illusion spells": {"hasSkill":[SkillsType.ILLUSION], "hasRace":[RacesType.ARGONIAN, RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.OHMES_RAHT, RacesType.SEA_ELF, RacesType.YNESAI]},
-    "Reach 100 in the Mysticism skill and learn all standard Mysticism spells": {"hasSkill":[SkillsType.MYSTICISM], "hasRace":[RacesType.BRETON, RacesType.ARGONIAN, RacesType.DARK_ELF, RacesType.CHIMERI_QUEY, RacesType.DUADRI]},
-    "Reach 100 in the Restoration skill and learn all standard Restoration spells": {"hasSkill":[SkillsType.RESTORATION], "hasRace":[RacesType.BRETON, RacesType.NAGA, RacesType.TOJAY]},
+    "Collect all unique Axes": {[ConditionType.HAS_SKILL]:[SkillsType.AXE],[ConditionType.HAS_RACE]:[RacesType.ORC, RacesType.NORD, RacesType.REDGUARD, RacesType.MALAHK_ORC, RacesType.CHIMERI_QUEY]},
+    "Collect all unique Bows and Crossbows": {[ConditionType.HAS_SKILL]:[SkillsType.MARKSMAN], [ConditionType.HAS_RACE]:[RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.YNESAI, RacesType.RIVERFOLK]},
+    "Collect all unique Blunt Weapons": {[ConditionType.HAS_SKILL]:[SkillsType.BLUNT_WEAPON], [ConditionType.HAS_RACE]:[RacesType.NORD, RacesType.IMPERIAL, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.TOJAY, RacesType.NAGA]},
+    "Collect all unique Long Blades": {[ConditionType.HAS_SKILL]:[SkillsType.LONG_BLADE], [ConditionType.HAS_RACE]:[RacesType.REDGUARD, RacesType.IMPERIAL, RacesType.DARK_ELF, RacesType.NORD, RacesType.CATHAY_RAHT, RacesType.CATHAY, RacesType.RIVERFOLK]},
+    "Collect all unique Short Blades": {[ConditionType.HAS_SKILL]:[SkillsType.SHORT_BLADE], [ConditionType.HAS_RACE]:[RacesType.DARK_ELF, RacesType.KHAJIIT, RacesType.REDGUARD, RacesType.YNESAI, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.OHMES, RacesType.SUTHAY]},
+    "Collect all unique Spears": {[ConditionType.HAS_SKILL]:[SkillsType.SPEAR], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.NORD, RacesType.AYLEID, RacesType.SEA_ELF, RacesType.CATHAY, RacesType.DUADRI]},
+    "Collect all unique Shields": {[ConditionType.HAS_SKILL]:[SkillsType.BLOCK], [ConditionType.HAS_RACE]:[RacesType.ORC, RacesType.KEPTU_QUEY, RacesType.RIVERFOLK, RacesType.BRETON]},
+    "Collect all Heavy Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.HEAVY_ARMOR], [ConditionType.HAS_RACE]:[RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.MALAHK_ORC]},
+    "Collect all Medium Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.MEDIUM_ARMOR], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.MALAHK_ORC]},
+    "Collect all Light Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.LIGHT_ARMOR], [ConditionType.HAS_RACE]:[RacesType.KHAJIIT, RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.IMPERIAL, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.DUADRI, RacesType.OHMES, RacesType.OHMES_RAHT, RacesType.SUTHAY]},
+    "Master the Alteration skill and learn all standard Alteration spells": {[ConditionType.HAS_SKILL]:[SkillsType.ALTERATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.NAGA, RacesType.REACHMAN, RacesType.SEA_ELF]},
+    "Master the Conjuration skill and learn all standard Conjuration spells": {[ConditionType.HAS_SKILL]:[SkillsType.CONJURATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.CHIMERI_QUEY, RacesType.REACHMAN]},
+    "Master the Destruction skill and learn all standard Destruction spells": {[ConditionType.HAS_SKILL]:[SkillsType.DESTRUCTION], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.DARK_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.REACHMAN, RacesType.SEA_ELF]},
+    "Master the Illusion skill and learn all standard Illusion spells": {[ConditionType.HAS_SKILL]:[SkillsType.ILLUSION], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.OHMES_RAHT, RacesType.SEA_ELF, RacesType.YNESAI]},
+    "Master the Mysticism skill and learn all standard Mysticism spells": {[ConditionType.HAS_SKILL]:[SkillsType.MYSTICISM], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.ARGONIAN, RacesType.DARK_ELF, RacesType.CHIMERI_QUEY, RacesType.DUADRI]},
+    "Master the Restoration skill and learn all standard Restoration spells": {[ConditionType.HAS_SKILL]:[SkillsType.RESTORATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.NAGA, RacesType.TOJAY]},
+    "Collect all tiers of alchemy apparatus": {[ConditionType.HAS_SKILL]:[SkillsType.ALCHEMY], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.ARGONIAN, RacesType.BRETON, RacesType.WOOD_ELF, RacesType.REACHMAN, RacesType.TOJAY]},
 });
 
 const MercantileStipulationsType = Object.freeze({
-    "Can't sell things for more than 1000 gold": {"notHasStipulation":["Can't sell"]},
-    "Can't sell things worth more than 1000 gold": {"notHasStipulation":["Can't sell"]},
-    "Can't sell things worth less than 1000 gold": {"notHasStipulation":["Can't sell"]},
+    "Can't sell things for more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
+    "Can't sell things worth more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
+    "Can't sell things worth less than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
     "All sales final": {},
 });
 
 const GeographicStipulationsType = Object.freeze({
-    "No Fast Travel services": {},
-    "No Teleportation Magic": {"notHasSkill":[SkillsType.MYSTICISM]},
-    "Start in Gnaar Mok": {"notHasStipulation":["Start in"]},
-    "Start in Hla Oad": {"notHasStipulation":["Start in"]},
-    "Start in Gnisis": {"notHasStipulation":["Start in"]},
-    "Start in Dagon Fel": {"notHasStipulation":["Start in"]},
-    "Start in Tel Fyr": {"notHasStipulation":["Start in"]},
-    "Start in Sadrith Mora": {"notHasStipulation":["Start in"]},
-    "Start in Firewatch": {"notHasStipulation":["Start in"]},
-    "Start in Narsis": {"notHasStipulation":["Start in"]},
-    "Start in Port Telvannis": {"notHasStipulation":["Start in"]},
-    "Start in Nanaav": {"notHasStipulation":["Start in"]},
-    "Start in Ald Iuval": {"notHasStipulation":["Start in"]},
-/*    "Start in Anvil": {"notHasStipulation":["Start in"]},
-    "Start in Dragonstar": {"notHasStipulation":["Start in"]},
+    "No fast travel services": {[ConditionType.NOT_HAS_STIPULATION]:["No teleportation magic"]},
+    "No teleportation magic": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MYSTICISM], [ConditionType.NOT_HAS_STIPULATION]:["No fast travel services"]},
+    "Start in Gnaar Mok": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Hla Oad": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Gnisis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Dagon Fel": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Tel Fyr": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Sadrith Mora": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Firewatch": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Narsis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Port Telvannis": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Nanaav": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Ald Iuval": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+/*    "Start in Anvil": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
+    "Start in Dragonstar": {[ConditionType.NOT_HAS_STIPULATION]:["Start in"]},
 */
 });
 
 const LevellingStipulationsType = Object.freeze({
     "No buying training + No training spells": {},
     "Only train 5 times per character level": {},
-    "Level 10 cap": {"notHasStipulation":["Level 15 cap"]},
-    "Level 15 cap": {"notHasStipulation":["Level 10 cap"]},
+    "Level 10 cap": {[ConditionType.NOT_HAS_STIPULATION]:["Level 15 cap"]},
+    "Level 15 cap": {[ConditionType.NOT_HAS_STIPULATION]:["Level 10 cap"]},
     "Must level up when able": {},
 });
 
 const SkillsStipulationsType = Object.freeze({
-    "Only use major skills from class": {"notHasStipulation":["skills from class", "No buying training"]},
-    "Only use skills from class": {"notHasStipulation":["skills from class", "No buying training"]},
-    "Cannot use skills from class": {"notHasStipulation":["skills from class", "No buying training"]},
+    "Only use major skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training"]},
+    "Only use skills from class": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training"]},
+    "Cannot use skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"], [ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training"]},
 });
 
 const CrimeStipulationsType = Object.freeze({
-    "No stealing": {"notHasSkill":[SkillsType.SNEAK],"notHasObjective":["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu"]},
-    "No murdering": {"notHasObjective":["Morag Tong", "Ja-Natta Syndicate", "House Hlaalu", "House Telvanni", "Ordinators"]},
-    "No bribing": {"notHasSkill":[SkillsType.MERCANTILE], "notHasObjective":["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "East Empire Company"]},
-    "Ethical actions only": {"hasObjective":["Imperial Cult", "Temple", "Imperial Legion", "House Redoran"]},
-    "No opening locks (unless required to satisfy objective)": {"notHasSkill":[SkillsType.SECURITY]}
+    "No stealing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SNEAK],[ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu"]},
+    "No murdering": {[ConditionType.NOT_HAS_OBJECTIVE]:["Morag Tong", "Ja-Natta Syndicate", "House Hlaalu", "House Telvanni", "Ordinators"]},
+    "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE], [ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "East Empire Company"]},
+    "Ethical actions only": {[ConditionType.HAS_OBJECTIVE]:["Imperial Cult", "Temple", "Imperial Legion", "House Redoran"]},
+    "No opening locks (unless required to satisfy objective)": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SECURITY]}
 });
 
 const GearStipulationsType = Object.freeze({
-    "No meta knowledge (i.e. don't go somewhere just to get gear)": {},
-    "Can only use gear you bought": {"notHasStipulation":["Can only use gear", "Can only use custom enchantments"]},
-    "Can only use gear you were given in a quest": {"notHasStipulation":["Can only use gear", "Can only use custom enchantments"]},
-    "Can't use weapons": {"notHasStipulation":["skills from class"]},
+    "No meta knowledge (i.e. don't go somewhere just to get gear)": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"]},
+    "Can only use gear you bought": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can only use gear", "Can only use custom enchantments"]},
+    "Can only use gear you were given in a quest": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can only use gear", "Can only use custom enchantments"]},
+    "Can't use weapons": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
 });
 
 const PersuasionStipulationsType = Object.freeze({
     "Must intimidate to persuade": {},
-    "No bribing": {"notHasSkill":[SkillsType.MERCANTILE]},
+    "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE]},
     "No taunting": {},
 });
 
 const MagicStipulationsType = Object.freeze({
-    "No casting spells (enchantments and potions are allowed)": {"notHasSpecialization":[SpecializationType.MAGIC], "notHasObjective":["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"]},
+    "No casting spells (enchantments and potions are allowed)": {[ConditionType.NOT_HAS_SPECIALIZATION]:[SpecializationType.MAGIC], [ConditionType.NOT_HAS_OBJECTIVE]:["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"]},
     "No pre-made potions": {},
-    "No self-made potions": {"notHasSkill":[SkillsType.ALCHEMY]},
+    "No self-made potions": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.ALCHEMY]},
     "No scrolls": {},
     "No cast-when-used enchantments": {},
     "No cast-on-strike enchantments": {},
     "No constant effect enchantments": {},
     "Can only use custom enchantments": {},
     "No summons from enchantments": {},
-    "No summons": {"notHasSkill":[SkillsType.CONJURATION]}
+    "No summons": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.CONJURATION]}
 });
 
 const MiscellaneousStipulationsType = Object.freeze({
@@ -853,6 +868,8 @@ const MiscellaneousStipulationsType = Object.freeze({
     "No cancelling Dark Brotherhood attacks": {},
     "No waiting to restore health/magicka (Fatigue in cities is OK)": {},
     "Must get a blessing from every shrine you see": {},
+    "Cannot use your powers": {[ConditionType.HAS_RACE]:[RacesType.REDGUARD, RacesType.DARK_ELF, RacesType.ORC, RacesType.DUADRI, RacesType.MALAHK_ORC, RacesType.SEA_ELF]},
+    "Cannot summon Ancestor Ghost": {[ConditionType.HAS_BIRTHSIGN]:[BirthsignType.ATRONACH]}
 });
 
 function getRandomInt(max) {
@@ -872,51 +889,68 @@ function addLiChildren(node, list) {
 
 function validateConditions(conditions) {
     // Whitelist
-    if ("hasSkill" in conditions &&
+    if (ConditionType.HAS_SKILL in conditions &&
         !conditions.hasSkill.some(skill => globalClassSkills.includes(skill))) {
         console.log("Failed condition hasSkill");
         return false;
     }
-    if ("hasRace" in conditions &&
+    if (ConditionType.HAS_RACE in conditions &&
         !conditions.hasRace.includes(globalRace)) {
         console.log("Failed condition hasRace");
         return false;
     }
-    if ("hasSpecialization" in conditions &&
+    if (ConditionType.HAS_BIRTHSIGN in conditions &&
+        !conditions.hasBirthsign.includes(globalBirthsign)) {
+        console.log("Failed condition hasBirthsign");
+        return false;
+    }
+    if (ConditionType.HAS_SPECIALIZATION in conditions &&
         !conditions.hasSpecialization.includes(globalClassSpecialization)) {
         console.log("Failed condition hasSpecialization");
         return false;
     }
-    if ("hasObjective" in conditions &&
+    if (ConditionType.HAS_OBJECTIVE in conditions &&
         !conditions.hasObjective.some(allowedObjective =>
             globalObjective.includes(allowedObjective))) {
         console.log("Failed condition hasObjective");
         return false;
     }
+    if (ConditionType.HAS_STIPULATION in conditions &&
+        !conditions.hasStipulation.some(allowed =>
+            globalStipulations.some(stipulation =>
+                stipulation.toLowerCase().includes(allowed.toLowerCase())))) {
+        console.log("Failed condition hasStipulation");
+        return false;
+    }
 
     // Blacklist
-    if ("notHasSkill" in conditions &&
+    if (ConditionType.NOT_HAS_SKILL in conditions &&
         conditions.notHasSkill.some(skill => globalClassSkills.includes(skill))) {
         console.log("Failed condition notHasSkill");
         return false;
     }
-    if ("notHasRace" in conditions &&
+    if (ConditionType.NOT_HAS_RACE in conditions &&
         conditions.notHasRace.includes(globalRace)) {
         console.log("Failed condition notHasRace");
         return false;
     }
-    if ("notHasSpecialization" in conditions &&
+    if (ConditionType.NOT_HAS_BIRTHSIGN in conditions &&
+        conditions.notHasBirthsign.includes(globalBirthsign)) {
+        console.log("Failed condition notHasBirthsign");
+        return false;
+    }
+    if (ConditionType.NOT_HAS_SPECIALIZATION in conditions &&
         conditions.notHasSpecialization.includes(globalClassSpecialization)) {
         console.log("Failed condition notHasSpecialization");
         return false;
     }
-    if ("notHasObjective" in conditions &&
+    if (ConditionType.NOT_HAS_OBJECTIVE in conditions &&
         conditions.notHasObjective.some(disallowedObjective =>
             globalObjective.includes(disallowedObjective))) {
         console.log("Failed condition notHasObjective");
         return false;
     }
-    if ("notHasStipulation" in conditions &&
+    if (ConditionType.NOT_HAS_STIPULATION in conditions &&
         conditions.notHasStipulation.some(disallowed =>
             globalStipulations.some(stipulation =>
                 stipulation.toLowerCase().includes(disallowed.toLowerCase())))) {
@@ -958,7 +992,8 @@ function randomizeClass() {
 function randomizeBirthsign() {
     let birthsigns = Object.values(BirthsignType);
     let random = getRandomInt(birthsigns.length);
-    document.getElementById("birthsign").textContent = birthsigns[random];
+    globalBirthsign = birthsigns[random];
+    document.getElementById("birthsign").textContent = globalBirthsign;
 }
 
 function randomizeObjective() {
@@ -968,8 +1003,10 @@ function randomizeObjective() {
         objectiveType = FactionObjectivesType;
     } else if (random >= 20) {
         objectiveType = GeographicObjectivesType;
-    } else {
+    } else if (random >= 5) {
         objectiveType = CollectionObjectivesType;
+    } else {
+        objectiveType = UnfilteredCollectionObjectivesType;
     }
     let validObjectives = [];
     let keys = Object.keys(objectiveType);
@@ -1038,7 +1075,8 @@ function randomizeStipulations() {
     let actualStipulations = 0;
     while( actualStipulations < targetNumStipulations ) {
         thisStip = getStipulation();
-        if(!globalStipulations.includes(thisStip)){
+        console.log("Selected stipulation " + thisStip);
+        if(thisStip && !globalStipulations.includes(thisStip)){
             globalStipulations.push(thisStip);
             actualStipulations++;
         }
