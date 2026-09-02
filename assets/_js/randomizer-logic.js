@@ -1,10 +1,10 @@
 // Global variables
-var race = "";
-var className = "";
-var classSpecialization = "";
-var classSkills = [];
-var objective = "";
-var stipulations = []; // Might not need this one
+var globalRace = "";
+var globalClassName = "";
+var globalClassSpecialization = "";
+var globalClassSkills = [];
+var globalObjective = "";
+var globalStipulations = [];
 
 const RacesType = Object.freeze({
     ARGONIAN: "Argonian",
@@ -775,44 +775,44 @@ const CollectionObjectivesType = Object.freeze({
 });
 
 const MercantileStipulationsType = Object.freeze({
-    "Can't sell things for more than 1000 gold": {"notHaveStipulation":["Can't sell"]},
-    "Can't sell things worth more than 1000 gold": {"notHaveStipulation":["Can't sell"]},
-    "Can't sell things worth less than 1000 gold": {"notHaveStipulation":["Can't sell"]},
+    "Can't sell things for more than 1000 gold": {"notHasStipulation":["Can't sell"]},
+    "Can't sell things worth more than 1000 gold": {"notHasStipulation":["Can't sell"]},
+    "Can't sell things worth less than 1000 gold": {"notHasStipulation":["Can't sell"]},
     "All sales final": {},
 });
 
 const GeographicStipulationsType = Object.freeze({
     "No Fast Travel services": {},
     "No Teleportation Magic": {"notHasSkill":[SkillsType.MYSTICISM]},
-    "Start in Gnaar Mok": {"notHaveStipulation":["Start in"]},
-    "Start in Hla Oad": {"notHaveStipulation":["Start in"]},
-    "Start in Gnisis": {"notHaveStipulation":["Start in"]},
-    "Start in Dagon Fel": {"notHaveStipulation":["Start in"]},
-    "Start in Tel Fyr": {"notHaveStipulation":["Start in"]},
-    "Start in Sadrith Mora": {"notHaveStipulation":["Start in"]},
-    "Start in Firewatch": {"notHaveStipulation":["Start in"]},
-    "Start in Narsis": {"notHaveStipulation":["Start in"]},
-    "Start in Port Telvannis": {"notHaveStipulation":["Start in"]},
-    "Start in Nanaav": {"notHaveStipulation":["Start in"]},
-    "Start in Ald Iuval": {"notHaveStipulation":["Start in"]},
-/*    "Start in Anvil": {"notHaveStipulation":["Start in"]},
-    "Start in Dragonstar": {"notHaveStipulation":["Start in"]},
+    "Start in Gnaar Mok": {"notHasStipulation":["Start in"]},
+    "Start in Hla Oad": {"notHasStipulation":["Start in"]},
+    "Start in Gnisis": {"notHasStipulation":["Start in"]},
+    "Start in Dagon Fel": {"notHasStipulation":["Start in"]},
+    "Start in Tel Fyr": {"notHasStipulation":["Start in"]},
+    "Start in Sadrith Mora": {"notHasStipulation":["Start in"]},
+    "Start in Firewatch": {"notHasStipulation":["Start in"]},
+    "Start in Narsis": {"notHasStipulation":["Start in"]},
+    "Start in Port Telvannis": {"notHasStipulation":["Start in"]},
+    "Start in Nanaav": {"notHasStipulation":["Start in"]},
+    "Start in Ald Iuval": {"notHasStipulation":["Start in"]},
+/*    "Start in Anvil": {"notHasStipulation":["Start in"]},
+    "Start in Dragonstar": {"notHasStipulation":["Start in"]},
 */
 });
 
 const LevellingStipulationsType = Object.freeze({
-    "No Buying Training + No Training Spells": {},
+    "No buying training + No training spells": {},
     "Only train 5 times per character level": {},
-    "Level 10 cap": {"notHaveStipulation":["Level 15 cap"]},
-    "Level 15 cap": {"notHaveStipulation":["Level 10 cap"]},
+    "Level 10 cap": {"notHasStipulation":["Level 15 cap"]},
+    "Level 15 cap": {"notHasStipulation":["Level 10 cap"]},
     "Must level up when able": {},
-})
+});
 
 const SkillsStipulationsType = Object.freeze({
-    "Only use major skills from class": {"notHaveStipulation":["skills from class"]},
-    "Only use skills from class": {"notHaveStipulation":["skills from class"]},
-    "Cannot use skills from class": {"notHaveStipulation":["skills from class"]},
-})
+    "Only use major skills from class": {"notHasStipulation":["skills from class", "No buying training"]},
+    "Only use skills from class": {"notHasStipulation":["skills from class", "No buying training"]},
+    "Cannot use skills from class": {"notHasStipulation":["skills from class", "No buying training"]},
+});
 
 const CrimeStipulationsType = Object.freeze({
     "No stealing": {"notHasSkill":[SkillsType.SNEAK],"notHasObjective":["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu"]},
@@ -820,39 +820,40 @@ const CrimeStipulationsType = Object.freeze({
     "No bribing": {"notHasSkill":[SkillsType.MERCANTILE], "notHasObjective":["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "East Empire Company"]},
     "Ethical actions only": {"hasObjective":["Imperial Cult", "Temple", "Imperial Legion", "House Redoran"]},
     "No opening locks (unless required to satisfy objective)": {"notHasSkill":[SkillsType.SECURITY]}
-})
+});
 
 const GearStipulationsType = Object.freeze({
     "No meta knowledge (i.e. don't go somewhere just to get gear)": {},
-    "Can only use gear you bought": {"notHaveStipulation":["Can only use gear"]},
-    "Can only use gear you were given in a quest": {"notHaveStipulation":["Can only use gear"]},
-    "Can't use weapons": {"notHaveStipulation":["skills from class"]},
-})
+    "Can only use gear you bought": {"notHasStipulation":["Can only use gear", "Can only use custom enchantments"]},
+    "Can only use gear you were given in a quest": {"notHasStipulation":["Can only use gear", "Can only use custom enchantments"]},
+    "Can't use weapons": {"notHasStipulation":["skills from class"]},
+});
 
 const PersuasionStipulationsType = Object.freeze({
     "Must intimidate to persuade": {},
     "No bribing": {"notHasSkill":[SkillsType.MERCANTILE]},
     "No taunting": {},
-})
+});
 
 const MagicStipulationsType = Object.freeze({
-    "No casting spells (enchantments and potions are allowed)": {"notHasSpecialization":[SpecializationType.MAGIC]},
+    "No casting spells (enchantments and potions are allowed)": {"notHasSpecialization":[SpecializationType.MAGIC], "notHasObjective":["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"]},
     "No pre-made potions": {},
     "No self-made potions": {"notHasSkill":[SkillsType.ALCHEMY]},
     "No scrolls": {},
     "No cast-when-used enchantments": {},
     "No cast-on-strike enchantments": {},
     "No constant effect enchantments": {},
-    "Can only used custom enchantments": {},
+    "Can only use custom enchantments": {},
     "No summons from enchantments": {},
     "No summons": {"notHasSkill":[SkillsType.CONJURATION]}
-})
+});
 
 const MiscellaneousStipulationsType = Object.freeze({
     "No Seyda Neen": {},
     "No cancelling Dark Brotherhood attacks": {},
     "No waiting to restore health/magicka (Fatigue in cities is OK)": {},
-})
+    "Must get a blessing from every shrine you see": {},
+});
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -872,49 +873,53 @@ function addLiChildren(node, list) {
 function validateConditions(conditions) {
     // Whitelist
     if ("hasSkill" in conditions &&
-        !conditions.hasSkill.some(skill => classSkills.includes(skill))) {
+        !conditions.hasSkill.some(skill => globalClassSkills.includes(skill))) {
         console.log("Failed condition hasSkill");
         return false;
     }
     if ("hasRace" in conditions &&
-        !conditions.hasRace.includes(race)) {
+        !conditions.hasRace.includes(globalRace)) {
         console.log("Failed condition hasRace");
         return false;
     }
     if ("hasSpecialization" in conditions &&
-        !conditions.hasSpecialization.includes(classSpecialization)) {
+        !conditions.hasSpecialization.includes(globalClassSpecialization)) {
         console.log("Failed condition hasSpecialization");
         return false;
     }
     if ("hasObjective" in conditions &&
-        !conditions.hasObjective.some(allowed => objective.includes(allowed))) {
+        !conditions.hasObjective.some(allowedObjective =>
+            globalObjective.includes(allowedObjective))) {
         console.log("Failed condition hasObjective");
         return false;
     }
 
     // Blacklist
     if ("notHasSkill" in conditions &&
-        conditions.notHasSkill.some(skill => classSkills.includes(skill))) {
+        conditions.notHasSkill.some(skill => globalClassSkills.includes(skill))) {
         console.log("Failed condition notHasSkill");
         return false;
     }
     if ("notHasRace" in conditions &&
-        conditions.notHasRace.includes(race)) {
+        conditions.notHasRace.includes(globalRace)) {
         console.log("Failed condition notHasRace");
         return false;
     }
     if ("notHasSpecialization" in conditions &&
-        conditions.notHasSpecialization.includes(classSpecialization)) {
+        conditions.notHasSpecialization.includes(globalClassSpecialization)) {
         console.log("Failed condition notHasSpecialization");
         return false;
     }
     if ("notHasObjective" in conditions &&
-        conditions.notHasObjective.some(disallowed => objective.includes(disallowed))) {
+        conditions.notHasObjective.some(disallowedObjective =>
+            globalObjective.includes(disallowedObjective))) {
         console.log("Failed condition notHasObjective");
         return false;
     }
     if ("notHasStipulation" in conditions &&
-        conditions.notHasObjective.some(disallowed => objective.includes(disallowed))) {
+        conditions.notHasStipulation.some(disallowed =>
+            globalStipulations.some(stipulation =>
+                stipulation.toLowerCase().includes(disallowed.toLowerCase())))) {
         console.log("Failed condition notHasStipulation");
         return false;
     }
@@ -928,9 +933,9 @@ function randomizeRace() {
     let random = getRandomInt(races.length);
 
     // Set the globals
-    race = races[random]
+    globalRace = races[random]
 
-    document.getElementById("race").textContent = race;
+    document.getElementById("race").textContent = globalRace;
 }
 
 function randomizeClass() {
@@ -939,11 +944,11 @@ function randomizeClass() {
     let myclass = classes[random];
 
     // Set the globals
-    className = myclass.name;
-    classSpecialization = myclass.specialization;
-    classSkills = myclass.majors.concat(myclass.minors)
+    globalClassName = myclass.name;
+    globalClassSpecialization = myclass.specialization;
+    globalClassSkills = myclass.majors.concat(myclass.minors)
 
-    document.getElementById("class-name").textContent = className;
+    document.getElementById("class-name").textContent = globalClassName;
     document.getElementById("class-specialization").textContent = myclass.specialization;
     addLiChildren(document.getElementById("class-attributes"), myclass.attributes);
     addLiChildren(document.getElementById("class-major-skills"), myclass.majors);
@@ -980,8 +985,8 @@ function randomizeObjective() {
         validObjectives = validObjectives.concat(Object.keys(UnfilteredCollectionObjectivesType));
     }
     random = getRandomInt(validObjectives.length);
-    objective = validObjectives[random];
-    document.getElementById("objective").textContent = objective;
+    globalObjective = validObjectives[random];
+    document.getElementById("objective").textContent = globalObjective;
 }
 
 function getStipulation() {
@@ -1028,17 +1033,17 @@ function getStipulation() {
 }
 
 function randomizeStipulations() {
-    stipulations = [];
+    globalStipulations = [];
     let targetNumStipulations = 2 + getRandomInt(3); 
     let actualStipulations = 0;
     while( actualStipulations < targetNumStipulations ) {
         thisStip = getStipulation();
-        if(!stipulations.includes(thisStip)){
-            stipulations.push(thisStip);
+        if(!globalStipulations.includes(thisStip)){
+            globalStipulations.push(thisStip);
             actualStipulations++;
         }
     }
-    addLiChildren(document.getElementById("stipulations"), stipulations);
+    addLiChildren(document.getElementById("stipulations"), globalStipulations);
 }
 
 function init() {
