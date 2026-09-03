@@ -700,22 +700,7 @@ const ConditionType = Object.freeze({
     NOT_HAS_STIPULATION: "notHasStipulation"
 })
 
-const GeographicObjectivesType = Object.freeze({
-    "Complete all miscellaneous quests and dungeons in Bitter Coast + Ascadian Isles": {},
-    "Complete all miscellaneous quests and dungeons in West Gash + Sheogorad": {},
-    "Complete all miscellaneous quests and dungeons in Grazelands + Molag Amur": {},
-    "Complete all miscellaneous quests and dungeons in Azura's Coast": {},
-    "Complete all miscellaneous quests and dungeons in The Ashlands + Red Mountain": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 1": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 2": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 3": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 4": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 5": {},
-/*    "Complete all miscellaneous quests and dungeons in Cyrodiil": {},
-    "Complete all miscellaneous quests and dungeons in Skyrim": {}, */
-})
-
-const FactionObjectivesType = Object.freeze({
+const ObjectivesType = Object.freeze({
     "Complete Vvardenfell Fighters Guild": {},
     "Complete Vvardenfell Mages Guild": {},
     "Complete Vvardenfell Thieves Guild": {},
@@ -741,18 +726,45 @@ const FactionObjectivesType = Object.freeze({
     "Complete Ordinators": {},
     "Complete East Empire Company": {},
     "Complete Ja'Natta Syndicate": {},
-/*    "Complete Cyrodiil + Skyrim Fighters Guild": {},
+    /*    "Complete Cyrodiil + Skyrim Fighters Guild": {},
     "Complete Cyrodiil + Skyrim Mages Guild": {},
     "Complete Cyrodiil + Skyrim Thieves Guild": {},
     "Complete Kingdom of Anvil": {},
     "Complete the Abecette Fight Pit, Narsis Arena, and Dragonstar Arena": {},
     "Complete Itinerant Priests": {},
     "Complete all bounties in Morrowind, Cyrodiil, and Skyrim": {}, */
+    "Fully explore Kemel-Ze": {},
+    "Fully explore Mora Ancestral Tomb": {},
+    "Create a custom CE enchant on every equipment slot": {[ConditionType.HAS_SKILL]:[SkillsType.ENCHANT]},
+    "Collect all artifacts mentioned in the book 'Tamrielic Lore'": {},
+    "Master the Alteration skill and learn all standard Alteration spells": {[ConditionType.HAS_SKILL]:[SkillsType.ALTERATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.NAGA, RacesType.REACHMAN, RacesType.SEA_ELF]},
+    "Master the Conjuration skill and learn all standard Conjuration spells": {[ConditionType.HAS_SKILL]:[SkillsType.CONJURATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.CHIMERI_QUEY, RacesType.REACHMAN]},
+    "Master the Destruction skill and learn all standard Destruction spells": {[ConditionType.HAS_SKILL]:[SkillsType.DESTRUCTION], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.DARK_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.REACHMAN, RacesType.SEA_ELF]},
+    "Master the Illusion skill and learn all standard Illusion spells": {[ConditionType.HAS_SKILL]:[SkillsType.ILLUSION], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.OHMES_RAHT, RacesType.SEA_ELF, RacesType.YNESAI]},
+    "Master the Mysticism skill and learn all standard Mysticism spells": {[ConditionType.HAS_SKILL]:[SkillsType.MYSTICISM], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.ARGONIAN, RacesType.DARK_ELF, RacesType.CHIMERI_QUEY, RacesType.DUADRI]},
+    "Master the Restoration skill and learn all standard Restoration spells": {[ConditionType.HAS_SKILL]:[SkillsType.RESTORATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.NAGA, RacesType.TOJAY]},
+    "Collect all tiers of alchemy apparatus": {[ConditionType.HAS_SKILL]:[SkillsType.ALCHEMY], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.ARGONIAN, RacesType.BRETON, RacesType.WOOD_ELF, RacesType.REACHMAN, RacesType.TOJAY]},
+    "Collect all propylon indexes on Vvardenfell": {},
 });
+
+/* Commenting these out because BOH didn't like them
+const GeographicObjectivesType = Object.freeze({
+    "Complete all miscellaneous quests and dungeons in Bitter Coast + Ascadian Isles": {},
+    "Complete all miscellaneous quests and dungeons in West Gash + Sheogorad": {},
+    "Complete all miscellaneous quests and dungeons in Grazelands + Molag Amur": {},
+    "Complete all miscellaneous quests and dungeons in Azura's Coast": {},
+    "Complete all miscellaneous quests and dungeons in The Ashlands + Red Mountain": {},
+    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 1": {},
+    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 2": {},
+    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 3": {},
+    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 4": {},
+    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 5": {},
+    "Complete all miscellaneous quests and dungeons in Cyrodiil": {},
+    "Complete all miscellaneous quests and dungeons in Skyrim": {},
+})
 
 const UnfilteredCollectionObjectivesType = Object.freeze({
     "Visit every settlement": {},
-    "Collect all artifacts mentioned in the book 'Tamrielic Lore'": {},
     "Collect all 36 Lessons of Vivec": {},
     "Collect all Daedric Weapons and Armor": {},
     "Collect all House Dagoth Souls": {},
@@ -761,9 +773,7 @@ const UnfilteredCollectionObjectivesType = Object.freeze({
     "Collect all unique enchanted Pants": {},
     "Collect all ring artifacts": {},
     "Collect all amulet artifacts": {},
-    "Collect all propylon indexes on Vvardenfell": {},
     "Collect all unique enchanted Shoes": {[ConditionType.NOT_HAS_RACE]:[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
-    "Create a custom CE enchant on every equipment slot": {[ConditionType.HAS_SKILL]:[SkillsType.ENCHANT]},
 });
 
 const CollectionObjectivesType = Object.freeze({
@@ -777,14 +787,8 @@ const CollectionObjectivesType = Object.freeze({
     "Collect all Heavy Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.HEAVY_ARMOR], [ConditionType.HAS_RACE]:[RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.MALAHK_ORC]},
     "Collect all Medium Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.MEDIUM_ARMOR], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.MALAHK_ORC]},
     "Collect all Light Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.LIGHT_ARMOR], [ConditionType.HAS_RACE]:[RacesType.KHAJIIT, RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.IMPERIAL, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.DUADRI, RacesType.OHMES, RacesType.OHMES_RAHT, RacesType.SUTHAY]},
-    "Master the Alteration skill and learn all standard Alteration spells": {[ConditionType.HAS_SKILL]:[SkillsType.ALTERATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.NAGA, RacesType.REACHMAN, RacesType.SEA_ELF]},
-    "Master the Conjuration skill and learn all standard Conjuration spells": {[ConditionType.HAS_SKILL]:[SkillsType.CONJURATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.CHIMERI_QUEY, RacesType.REACHMAN]},
-    "Master the Destruction skill and learn all standard Destruction spells": {[ConditionType.HAS_SKILL]:[SkillsType.DESTRUCTION], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.DARK_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.REACHMAN, RacesType.SEA_ELF]},
-    "Master the Illusion skill and learn all standard Illusion spells": {[ConditionType.HAS_SKILL]:[SkillsType.ILLUSION], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.OHMES_RAHT, RacesType.SEA_ELF, RacesType.YNESAI]},
-    "Master the Mysticism skill and learn all standard Mysticism spells": {[ConditionType.HAS_SKILL]:[SkillsType.MYSTICISM], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.ARGONIAN, RacesType.DARK_ELF, RacesType.CHIMERI_QUEY, RacesType.DUADRI]},
-    "Master the Restoration skill and learn all standard Restoration spells": {[ConditionType.HAS_SKILL]:[SkillsType.RESTORATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.NAGA, RacesType.TOJAY]},
-    "Collect all tiers of alchemy apparatus": {[ConditionType.HAS_SKILL]:[SkillsType.ALCHEMY], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.ARGONIAN, RacesType.BRETON, RacesType.WOOD_ELF, RacesType.REACHMAN, RacesType.TOJAY]},
 });
+*/
 
 const MercantileStipulationsType = Object.freeze({
     "Can't sell things for more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
@@ -1046,28 +1050,15 @@ function randomizeBirthsign() {
 
 function randomizeObjective() {
     let random = getRandomInt(100);
-    let objectiveType;
-    if (random >= 50) {
-        objectiveType = FactionObjectivesType;
-    } else if (random >= 20) {
-        objectiveType = GeographicObjectivesType;
-    } else if (random >= 5) {
-        objectiveType = CollectionObjectivesType;
-    } else {
-        objectiveType = UnfilteredCollectionObjectivesType;
-    }
     let validObjectives = [];
-    let keys = Object.keys(objectiveType);
+    let keys = Object.keys(ObjectivesType);
     for(var i = 0; i < keys.length; i++){
         let thisObj = keys[i];
         console.log("Evaluating objective " + thisObj);
-        if( validateConditions(objectiveType[thisObj]) )
+        if( validateConditions(ObjectivesType[thisObj]) )
         {
             validObjectives.push(thisObj);
         }
-    }
-    if( (validObjectives.length == 0) && objectiveType == CollectionObjectivesType){
-        validObjectives = validObjectives.concat(Object.keys(UnfilteredCollectionObjectivesType));
     }
     random = getRandomInt(validObjectives.length);
     globalObjective = validObjectives[random];
