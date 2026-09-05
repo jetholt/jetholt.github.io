@@ -12,6 +12,7 @@ body{
     justify-content: center;
     display: flex;
     line-height: var(--line-height);
+    padding: 0px 50px;
 }
 .app{
     width: 50em;
@@ -39,6 +40,9 @@ input {
         top: calc(var(--top) + 2px);
         left: calc(var(--left) + 1px);
     }
+}
+a {
+    color: var(--titles);
 }
 
 .elements-wrapper {

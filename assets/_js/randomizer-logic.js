@@ -1,8 +1,10 @@
 // Global variables
+var globalIsPremade = false; // If it's a premade character like Caius, Smokeskin-Killer, etc
 var globalRace = "";
 var globalBirthsign = "";
 var globalClassName = "";
 var globalClassSpecialization = "";
+var globalClassAttributes = [];
 var globalClassSkills = [];
 var globalObjective = "";
 var globalStipulations = [];
@@ -736,7 +738,7 @@ const ObjectivesType = Object.freeze({
     "Fully explore Kemel-Ze": {},
     "Fully explore Mora Ancestral Tomb": {},
     "Create a custom CE enchant on every equipment slot": {[ConditionType.HAS_SKILL]:[SkillsType.ENCHANT]},
-    "Collect all artifacts mentioned in the book 'Tamrielic Lore'": {},
+    "Collect all artifacts mentioned in Yagrum Bagarn's book '<a href='https://en.uesp.net/wiki/Morrowind:Tamrielic_Lore'>Tamrielic Lore</a>'": {},
     "Master the Alteration skill and learn all standard Alteration spells": {[ConditionType.HAS_SKILL]:[SkillsType.ALTERATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.NAGA, RacesType.REACHMAN, RacesType.SEA_ELF]},
     "Master the Conjuration skill and learn all standard Conjuration spells": {[ConditionType.HAS_SKILL]:[SkillsType.CONJURATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.HIGH_ELF, RacesType.AYLEID, RacesType.CHIMERI_QUEY, RacesType.REACHMAN]},
     "Master the Destruction skill and learn all standard Destruction spells": {[ConditionType.HAS_SKILL]:[SkillsType.DESTRUCTION], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.DARK_ELF, RacesType.AYLEID, RacesType.DAGI_RAHT, RacesType.REACHMAN, RacesType.SEA_ELF]},
@@ -745,24 +747,21 @@ const ObjectivesType = Object.freeze({
     "Master the Restoration skill and learn all standard Restoration spells": {[ConditionType.HAS_SKILL]:[SkillsType.RESTORATION], [ConditionType.HAS_RACE]:[RacesType.BRETON, RacesType.NAGA, RacesType.TOJAY]},
     "Collect all tiers of alchemy apparatus": {[ConditionType.HAS_SKILL]:[SkillsType.ALCHEMY], [ConditionType.HAS_RACE]:[RacesType.HIGH_ELF, RacesType.ARGONIAN, RacesType.BRETON, RacesType.WOOD_ELF, RacesType.REACHMAN, RacesType.TOJAY]},
     "Collect all propylon indexes on Vvardenfell": {},
+    "Reach Level 20 whilst remaining within Bitter Coast + Ascadian Isles": {},
+    "Reach Level 20 whilst remaining within West Gash + Sheogorad": {},
+    "Reach Level 20 whilst remaining within Grazelands + Molag Amur": {},
+    "Reach Level 20 whilst remaining within Azura's Coast": {},
+    "Reach Level 20 whilst remaining within The Ashlands + Red Mountain": {},
+    "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 1": {},
+    "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 2": {},
+    "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 3": {},
+    "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 4": {},
+    "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 5": {},
+/*    "Reach Level 20 whilst remaining within Cyrodiil": {},
+    "Reach Level 20 whilst remaining within Skyrim": {}, */
 });
 
 /* Commenting these out because BOH didn't like them
-const GeographicObjectivesType = Object.freeze({
-    "Complete all miscellaneous quests and dungeons in Bitter Coast + Ascadian Isles": {},
-    "Complete all miscellaneous quests and dungeons in West Gash + Sheogorad": {},
-    "Complete all miscellaneous quests and dungeons in Grazelands + Molag Amur": {},
-    "Complete all miscellaneous quests and dungeons in Azura's Coast": {},
-    "Complete all miscellaneous quests and dungeons in The Ashlands + Red Mountain": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 1": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 2": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 3": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 4": {},
-    "Complete all miscellaneous quests and dungeons in Tamriel Rebuilt Map 5": {},
-    "Complete all miscellaneous quests and dungeons in Cyrodiil": {},
-    "Complete all miscellaneous quests and dungeons in Skyrim": {},
-})
-
 const UnfilteredCollectionObjectivesType = Object.freeze({
     "Visit every settlement": {},
     "Collect all 36 Lessons of Vivec": {},
@@ -887,7 +886,7 @@ const GearStipulationsType = Object.freeze({
     "Must cycle between weapon types every kill": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "Can't use weapons"]},
     "Can't use Daedric, Glass, or Ebony gear": {[ConditionType.NOT_HAS_OBJECTIVE]:["Daedric"]},
     "Must use throwing weapons": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can't use weapons","skills from class"],[ConditionType.HAS_SKILL]:[SkillsType.MARKSMAN]},
-    "Cannot go above 50% encumberance": {},
+    "Cannot go above 50% encumbrance": {},
     "Can't carry money when outside of town": {},
 });
 
@@ -924,19 +923,63 @@ const MiscellaneousStipulationsType = Object.freeze({
     "Where's you uniform? Dress like you belong in any faction you join.": {},
 });
 
+const PresetCharacters = Object.freeze([
+    {
+        RACE: RacesType.IMPERIAL,
+        CLASS: {
+            "name": "Spymaster",
+            "specialization": SpecializationType.STEALTH,
+            "attributes": [AttributesType.STRENGTH, AttributesType.SPEED],
+            "majors": [SkillsType.UNARMORED, SkillsType.HAND_TO_HAND, SkillsType.SPEECHCRAFT, SkillsType.MERCANTILE, SkillsType.MYSTICISM],
+            "minors": [SkillsType.RESTORATION, SkillsType.ATHLETICS, SkillsType.ACROBATICS, SkillsType.SECURITY, SkillsType.ALCHEMY]
+        },
+        BIRTHSIGN: BirthsignType.LOVER,
+        OBJECTIVE: "Complete Main Quest (Back Path)",
+        STIPULATIONS: ["Play as Caius Cosades", "Use the custom Spymaster class provided", "Start in Balmora", "Must be bare-chested", "Must consume one piece of moon sugar per day", "Imperial factions only"]
+    },
+    {
+        RACE: RacesType.ARGONIAN,
+        CLASS: {
+            "name": "Killer",
+            "specialization": SpecializationType.COMBAT,
+            "attributes": [AttributesType.STRENGTH, AttributesType.ENDURANCE],
+            "majors": [SkillsType.LONG_BLADE, SkillsType.LIGHT_ARMOR, SkillsType.HEAVY_ARMOR, SkillsType.ATHLETICS, SkillsType.ENCHANT],
+            "minors": [SkillsType.SPEAR, SkillsType.UNARMORED, SkillsType.SECURITY, SkillsType.MERCANTILE, SkillsType.ACROBATICS]
+        },
+        BIRTHSIGN: BirthsignType.STEED,
+        OBJECTIVE: "Become Archmagister of House Telvanni (Vvardenfell and Mainland)",
+        STIPULATIONS: ["Play as Smokeskin-Killer", "Use the custom Killer class provided", "Start in Tel Vos", "Free all Argonian slaves you encounter"]
+    },
+    {
+        RACE: RacesType.IMPERIAL,
+        CLASS: {
+            "name": "Outlaw",
+            "specialization": SpecializationType.MAGIC,
+            "attributes": [AttributesType.INTELLIGENCE, AttributesType.WILLPOWER],
+            "majors": [SkillsType.CONJURATION, SkillsType.AXE, SkillsType.HEAVY_ARMOR, SkillsType.DESTRUCTION, SkillsType.SPEAR],
+            "minors": [SkillsType.LIGHT_ARMOR, SkillsType.UNARMORED, SkillsType.ALTERATION, SkillsType.MERCANTILE, SkillsType.ALCHEMY]
+        },
+        BIRTHSIGN: BirthsignType.ATRONACH,
+        OBJECTIVE: "Complete the Ja'Natta Syndicate",
+        STIPULATIONS: ["Play as Snowy Granius", "Use the custom Outlaw class provided", "Unethical quests only"]
+    },
+    {
+        RACE: RacesType.WOOD_ELF,
+        CLASS: {
+            "name": "Enchanter",
+            "specialization": SpecializationType.MAGIC,
+            "attributes": [AttributesType.INTELLIGENCE, AttributesType.WILLPOWER],
+            "majors": [SkillsType.ENCHANT, SkillsType.BLUNT_WEAPON, SkillsType.ALCHEMY, SkillsType.DESTRUCTION, SkillsType.UNARMORED],
+            "minors": [SkillsType.ALTERATION, SkillsType.ILLUSION, SkillsType.CONJURATION, SkillsType.MYSTICISM, SkillsType.RESTORATION]
+        },
+        BIRTHSIGN: BirthsignType.APPRENTICE,
+        OBJECTIVE: "Collect 50 different souls",
+        STIPULATIONS: ["Play as <a href='https://en.uesp.net/wiki/Tamriel_Rebuilt:Tynachos'>Tynachos</a>", "Start in Almas Thirr"]
+    }
+])
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
-}
-
-function addLiChildren(node, list) {
-    while (node.firstChild) {
-        node.removeChild(node.lastChild);
-    }
-    list.forEach((element) => {
-        let newNode = document.createElement("li");
-        newNode.textContent = element;
-        node.appendChild(newNode);
-    });
 }
 
 function validateConditions(conditions) {
@@ -1012,57 +1055,136 @@ function validateConditions(conditions) {
     return true;
 }
 
-function randomizeRace() {
-    // Todo - Need to cleanup and reset the other fields when clicking this
+function addLiChildren(node, list) {
+    while (node.firstChild) {
+        node.removeChild(node.lastChild);
+    }
+    list.forEach((element) => {
+        let newNode = document.createElement("li");
+        newNode.innerHTML = element;
+        node.appendChild(newNode);
+    });
+}
 
-    let races = Object.values(RacesType);
-    let random = getRandomInt(races.length);
-
-    // Set the globals
-    globalRace = races[random]
-
+function displayRace() {
     document.getElementById("race").textContent = globalRace;
 }
 
-function randomizeClass() {
-    let classes = Object.values(ClassesType);
-    let random = getRandomInt(classes.length);
-    let myclass = classes[random];
-
-    // Set the globals
-    globalClassName = myclass.name;
-    globalClassSpecialization = myclass.specialization;
-    globalClassSkills = myclass.majors.concat(myclass.minors)
-
+function displayClass() {
     document.getElementById("class-name").textContent = globalClassName;
-    document.getElementById("class-specialization").textContent = myclass.specialization;
-    addLiChildren(document.getElementById("class-attributes"), myclass.attributes);
-    addLiChildren(document.getElementById("class-major-skills"), myclass.majors);
-    addLiChildren(document.getElementById("class-minor-skills"), myclass.minors);
+    document.getElementById("class-specialization").textContent = globalClassSpecialization;
+    addLiChildren(document.getElementById("class-attributes"), globalClassAttributes);
+    addLiChildren(document.getElementById("class-major-skills"), globalClassSkills.slice(0,5));
+    addLiChildren(document.getElementById("class-minor-skills"), globalClassSkills.slice(5));
 }
 
-function randomizeBirthsign() {
-    let birthsigns = Object.values(BirthsignType);
-    let random = getRandomInt(birthsigns.length);
-    globalBirthsign = birthsigns[random];
+function displayBirthsign() {
     document.getElementById("birthsign").textContent = globalBirthsign;
 }
 
-function randomizeObjective() {
-    let random = getRandomInt(100);
-    let validObjectives = [];
-    let keys = Object.keys(ObjectivesType);
-    for(var i = 0; i < keys.length; i++){
-        let thisObj = keys[i];
-        console.log("Evaluating objective " + thisObj);
-        if( validateConditions(ObjectivesType[thisObj]) )
-        {
-            validObjectives.push(thisObj);
-        }
-    }
-    random = getRandomInt(validObjectives.length);
-    globalObjective = validObjectives[random];
+function displayObjective() {
     document.getElementById("objective").textContent = globalObjective;
+
+}
+
+function displayStipulations() {
+    addLiChildren(document.getElementById("stipulations"), globalStipulations);
+}
+
+function cleanup() {
+    globalIsPremade = false;
+    globalRace = "";
+    globalBirthsign = "";
+    globalClassName = "";
+    globalClassSpecialization = "";
+    globalClassAttributes = [];
+    globalClassSkills = [];
+    globalObjective = "";
+    globalStipulations = [];
+    displayRace();
+    displayClass();
+    displayBirthsign();
+    displayObjective();
+    displayStipulations();
+}
+
+function randomizePremade() {
+    random = getRandomInt(PresetCharacters.length);
+    preset = PresetCharacters[random];
+
+    globalIsPremade = true;
+    globalRace = preset.RACE;
+    globalBirthsign = preset.BIRTHSIGN;
+    globalClassName = preset.CLASS.name;
+    globalClassSpecialization = preset.CLASS.specialization;
+    globalClassAttributes = preset.CLASS.attributes;
+    globalClassSkills = preset.CLASS.majors.concat(preset.CLASS.minors);
+    globalObjective = preset.OBJECTIVE;
+    globalStipulations = preset.STIPULATIONS;
+}
+
+function randomizeRace() {
+    // Cleanup previous rolls
+    cleanup();
+
+    let random = getRandomInt(100);
+    if (random <= 2){
+        // Roll one of the iconic characters instead
+        randomizePremade();
+    }
+    else
+    {
+        // Roll a genuinely random character
+        let races = Object.values(RacesType);
+        random = getRandomInt(races.length);
+        // Set the globals
+        globalRace = races[random]
+    }
+
+    displayRace();
+}
+
+function randomizeClass() {
+    if (!globalIsPremade) {
+        let classes = Object.values(ClassesType);
+        let random = getRandomInt(classes.length);
+        let myclass = classes[random];
+
+        // Set the globals
+        globalClassName = myclass.name;
+        globalClassSpecialization = myclass.specialization;
+        globalClassAttributes = myclass.attributes;
+        globalClassSkills = myclass.majors.concat(myclass.minors)
+    }
+    displayClass();
+}
+
+function randomizeBirthsign() {
+    if (!globalIsPremade) {
+        let birthsigns = Object.values(BirthsignType);
+        let random = getRandomInt(birthsigns.length);
+        globalBirthsign = birthsigns[random];
+    }
+    displayBirthsign();
+}
+
+function randomizeObjective() {
+    if (!globalIsPremade) {
+        let random = getRandomInt(100);
+        let validObjectives = [];
+        let keys = Object.keys(ObjectivesType);
+        for(var i = 0; i < keys.length; i++){
+            let thisObj = keys[i];
+            console.log("Evaluating objective " + thisObj);
+            if( validateConditions(ObjectivesType[thisObj]) )
+            {
+                validObjectives.push(thisObj);
+            }
+        }
+        random = getRandomInt(validObjectives.length);
+        globalObjective = validObjectives[random];
+    }
+    displayObjective();
 }
 
 function getStipulation() {
@@ -1101,18 +1223,20 @@ function getStipulation() {
 }
 
 function randomizeStipulations() {
-    globalStipulations = [];
-    let targetNumStipulations = 2 + getRandomInt(3); 
-    let actualStipulations = 0;
-    while( actualStipulations < targetNumStipulations ) {
-        thisStip = getStipulation();
-        console.log("Selected stipulation " + thisStip);
-        if(thisStip && !globalStipulations.includes(thisStip)){
-            globalStipulations.push(thisStip);
-            actualStipulations++;
+    if (!globalIsPremade) {
+        globalStipulations = [];
+        let targetNumStipulations = 2 + getRandomInt(3); 
+        let actualStipulations = 0;
+        while( actualStipulations < targetNumStipulations ) {
+            thisStip = getStipulation();
+            console.log("Selected stipulation " + thisStip);
+            if(thisStip && !globalStipulations.includes(thisStip)){
+                globalStipulations.push(thisStip);
+                actualStipulations++;
+            }
         }
     }
-    addLiChildren(document.getElementById("stipulations"), globalStipulations);
+    displayStipulations();
 }
 
 function init() {
