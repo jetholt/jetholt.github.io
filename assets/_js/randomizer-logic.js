@@ -789,16 +789,6 @@ const CollectionObjectivesType = Object.freeze({
 });
 */
 
-const MercantileStipulationsType = Object.freeze({
-    "Can't sell things for more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
-    "Can't sell things worth more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
-    "Can't sell things worth less than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
-    "All sales final": {},
-    "Can't use the same merchant twice": {},
-    "Can't sell drugs": {[ConditionType.NOT_HAS_OBJECTIVE]:["Ja'Natta Syndicate", "Thieves Guild"]},
-    "Can't sell stolen goods": {[ConditionType.NOT_HAS_OBJECTIVE]:["Ja'Natta Syndicate", "Thieves Guild"]},
-});
-
 const GeographicStipulationsType = Object.freeze({
     "Start in Gnaar Mok": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Hla Oad": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
@@ -848,37 +838,34 @@ const GeographicStipulationsType = Object.freeze({
 */
 });
 
-const LevellingStipulationsType = Object.freeze({
+const StipulationsType = Object.freeze({
+    "Can't sell things for more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
+    "Can't sell things worth more than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
+    "Can't sell things worth less than 1000 gold": {[ConditionType.NOT_HAS_STIPULATION]:["Can't sell"]},
+    "All sales final": {},
+    "Can't use the same merchant twice": {},
+    "Can't sell drugs": {[ConditionType.NOT_HAS_OBJECTIVE]:["Ja'Natta Syndicate", "Thieves Guild"]},
+    "Can't sell stolen goods": {[ConditionType.NOT_HAS_OBJECTIVE]:["Ja'Natta Syndicate", "Thieves Guild"]},
     "No buying training + No training spells": {[ConditionType.NOT_HAS_OBJECTIVE]:["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"]},
     "Only train 5 times per character level": {},
     "Level 10 cap": {[ConditionType.NOT_HAS_STIPULATION]:["Level 15 cap"]},
     "Level 15 cap": {[ConditionType.NOT_HAS_STIPULATION]:["Level 10 cap"]},
     "Must level up when able": {},
     "Throw all your gold on the ground when levelling up": {},
-});
-
-const SkillsStipulationsType = Object.freeze({
     "Only use major skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"],[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training", "cycle between weapon types", "Can't use weapons"]},
     "Only use skills from class": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training", "cycle between weapon types", "Can't use weapons"]},
-    "Cannot use skills from class": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect","Master"], [ConditionType.NOT_HAS_STIPULATION]:["skills from class", "No buying training", "cycle between weapon types", "Can't use weapons"]},
     "Skills must be at least 20 to be used": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
     "Must haggle every transaction": {[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
     "Can only heal from self-made potions": {[ConditionType.HAS_SKILL]:[SkillsType.ALCHEMY], [ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
     "Try to sneak attack every enemy": {[ConditionType.HAS_SKILL]:[SkillsType.SNEAK], [ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
     "Must use NPCs to repair": {[ConditionType.NOT_HAS_SKILL]:["Armorer"]},
-    "Must cast detect key before unlocking": {[ConditionType.HAS_SKILL]:[SkillsType.MYSTICISM],[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]}
-});
-
-const CrimeStipulationsType = Object.freeze({
+    "Must cast detect key before unlocking": {[ConditionType.HAS_SKILL]:[SkillsType.MYSTICISM],[ConditionType.NOT_HAS_STIPULATION]:["skills from class"]},
     "No tresspassing": {[ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "Morag Tong", "House Telvanni"]},
     "No stealing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SNEAK],[ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu"]},
     "No murdering": {[ConditionType.NOT_HAS_OBJECTIVE]:["Morag Tong", "Ja-Natta Syndicate", "House Hlaalu", "House Telvanni", "Ordinators"]},
     "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE], [ConditionType.NOT_HAS_OBJECTIVE]:["Thieves Guild", "Ja-Natta Syndicate", "House Hlaalu", "East Empire Company"]},
     "Ethical actions only": {[ConditionType.HAS_OBJECTIVE]:["Imperial Cult", "Temple", "Imperial Legion", "House Redoran"]},
     "No opening locks (unless required to satisfy objective)": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.SECURITY]},
-});
-
-const GearStipulationsType = Object.freeze({
     "No meta knowledge (i.e. don't go somewhere just to get gear)": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"]},
     "Can only use gear you bought": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can only use gear", "Can only use custom enchantments"]},
     "Can only use gear you were given in a quest": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can only use gear", "Can only use custom enchantments"]},
@@ -888,9 +875,6 @@ const GearStipulationsType = Object.freeze({
     "Must use throwing weapons": {[ConditionType.NOT_HAS_OBJECTIVE]:["Collect"],[ConditionType.NOT_HAS_STIPULATION]:["Can't use weapons","skills from class"],[ConditionType.HAS_SKILL]:[SkillsType.MARKSMAN]},
     "Cannot go above 50% encumbrance": {},
     "Can't carry money when outside of town": {},
-});
-
-const MagicStipulationsType = Object.freeze({
     "No casting spells (scrolls and enchantments are allowed)": {[ConditionType.NOT_HAS_SPECIALIZATION]:[SpecializationType.MAGIC], [ConditionType.NOT_HAS_OBJECTIVE]:["Alteration", "Conjuration", "Destruction", "Illusion", "Mysticism", "Restoration"], [ConditionType.NOT_HAS_STIPULATION]:["enchantments", "scrolls"]},
     "No pre-made potions": {},
     "No self-made potions": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.ALCHEMY]},
@@ -902,9 +886,6 @@ const MagicStipulationsType = Object.freeze({
     "No summons from enchantments": {[ConditionType.NOT_HAS_STIPULATION]:["No summons", "Cannot summon"]},
     "No summons": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.CONJURATION],[ConditionType.NOT_HAS_STIPULATION]:["No summons", "Cannot summon"]},
     "No spellmaking": {[ConditionType.NOT_HAS_STIPULATION]:["No casting spells"]},
-});
-
-const MiscellaneousStipulationsType = Object.freeze({
     "Must intimidate to persuade": {},
     "No bribing": {[ConditionType.NOT_HAS_SKILL]:[SkillsType.MERCANTILE]},
     "No taunting": {},
@@ -1083,7 +1064,7 @@ function displayBirthsign() {
 }
 
 function displayObjective() {
-    document.getElementById("objective").textContent = globalObjective;
+    document.getElementById("objective").innerHTML = globalObjective;
 
 }
 
@@ -1189,31 +1170,19 @@ function randomizeObjective() {
 
 function getStipulation() {
     let random = getRandomInt(100);
-    let stipulationType;
+    let stipType;
     if (random >= 90) {
-        stipulationType = MercantileStipulationsType;
-    } else if (random >= 80) {
-        stipulationType = GeographicStipulationsType;
-    } else if (random >= 70) {
-        stipulationType = LevellingStipulationsType;
-    } else if (random >= 60) {
-        stipulationType = SkillsStipulationsType;
-    } else if (random >= 50) {
-        stipulationType = CrimeStipulationsType;
-    } else if (random >= 35) {
-        stipulationType = GearStipulationsType;
-    } else if (random >= 15) {
-        stipulationType = MiscellaneousStipulationsType;
-        
-    } else {
-        stipulationType = MagicStipulationsType;
+        stipType = GeographicStipulationsType;
+    }
+    else {
+        stipType = StipulationsType;
     }
     let validStipulations = [];
-    let keys = Object.keys(stipulationType);
+    let keys = Object.keys(stipType);
     for(var i = 0; i < keys.length; i++){
         thisStip = keys[i];
         console.log("Evaluating stipulation " + thisStip);
-        if( validateConditions(stipulationType[thisStip]) )
+        if( validateConditions(stipType[thisStip]) )
         {
             validStipulations.push(thisStip);
         }
