@@ -1,56 +1,67 @@
 ---
 layout: default
-heading: Morrowind Randomizer
+title: Morrowind Randomizer
 ---
-<div id="app">
-    <div>
-        <div class="wrapper elements-wrapper" id="race-wrapper">
-            <input type="image" src="/assets/images/reroll.png"/>
-            <label>Race</label>
-            <div id="race"></div>
-        </div>
-        <div class="wrapper elements-wrapper" id="birthsign-wrapper">
-            <input type="image" src="/assets/images/reroll.png"/>
-            <label>Birthsign</label>
-            <div id="birthsign"></div>
-        </div>
-    </div>
-    <div id="class-wrapper">
-        <input type="image" src="/assets/images/reroll.png"/>
-        <div class="elements-wrapper">
-            <div class="wrapper elements-wrapper">
-                <div id="class-name-wrapper">
-                    <label>Class Name</label>
-                    <div id="class-name"></div>
+<header>
+    <img src="/assets/images/moon-and-star.png"/>
+    <span>Morrowind Randomizer</span>
+</header>
+<main id="app">
+    <div id="inner-content">
+        <section>
+            <div class="wrapper elements-wrapper" id="race-wrapper">
+                <input type="image" src="/assets/images/reroll-race.png"/>
+                <label>Race</label>
+                <div id="race"></div>
+            </div>
+            <div class="wrapper elements-wrapper" id="birthsign-wrapper">
+                <input type="image" src="/assets/images/reroll-birthsign.png"/>
+                <label>Birthsign</label>
+                <div id="birthsign"></div>
+            </div>
+        </section>
+        <section id="class-wrapper">
+            <input type="image" src="/assets/images/reroll-class.png"/>
+            <div class="elements-wrapper">
+                <div class="wrapper elements-wrapper">
+                    <div id="class-name-wrapper">
+                        <label>Class Name</label>
+                        <div id="class-name"></div>
+                    </div>
+                    <div id="class-specialization-wrapper">
+                        <label>Specialization</label>
+                        <div id="class-specialization"></div>
+                    </div>
+                    <div id="class-attributes-wrapper">
+                        <label>Attributes</label>
+                        <ul id="class-attributes"></ul>
+                    </div>
                 </div>
-                <div id="class-specialization-wrapper">
-                    <label>Specialization</label>
-                    <div id="class-specialization"></div>
+                <div id="class-major-skills-wrapper" class="wrapper elements-wrapper">
+                    <label>Major Skills</label>
+                    <ul id="class-major-skills"></ul>
                 </div>
-                <div id="class-attributes-wrapper">
-                    <label>Attributes</label>
-                    <ul id="class-attributes"></ul>
+                <div id="class-minor-skills-wrapper" class="wrapper elements-wrapper">
+                    <label>Minor Skills</label>
+                    <ul id="class-minor-skills"></ul>
                 </div>
             </div>
-            <div id="class-major-skills-wrapper" class="wrapper elements-wrapper">
-                <label>Major Skills</label>
-                <ul id="class-major-skills"></ul>
-            </div>
-            <div id="class-minor-skills-wrapper" class="wrapper elements-wrapper">
-                <label>Minor Skills</label>
-                <ul id="class-minor-skills"></ul>
-            </div>
-        </div>
+        </section>
+        <section class="wrapper" id="objective-wrapper">
+            <input type="image" src="/assets/images/reroll-objective.png"/>
+            <label>Objective</label>
+            <div id="objective"></div>
+        </section>
+        <section class="wrapper" id="stipulations-wrapper">
+            <input type="image" src="/assets/images/reroll-stipulations.png"/>
+            <label>Stipulations</label>
+            <ul id="stipulations">
+            </ul>
+        </section>
     </div>
-    <div class="wrapper" id="objective-wrapper">
-        <input type="image" src="/assets/images/reroll.png"/>
-        <label>Objective</label>
-        <div id="objective"></div>
-    </div>
-    <div class="wrapper" id="stipulations-wrapper">
-        <input type="image" src="/assets/images/reroll.png"/>
-        <label>Stipulations</label>
-        <ul id="stipulations">
-        </ul>
-    </div>
-</div>
+</main>
+<footer>
+    <span>Site by Jetroid</span>
+    <span>Idea by <a href="https://www.youtube.com/@BestOpinionHaver95">Best Opinion Haver</a></span>
+    <span>Custom art by <a href="https://bsky.app/profile/oldsketchbook.bsky.social">Old Sketchbook</a></span>
+</footer>
