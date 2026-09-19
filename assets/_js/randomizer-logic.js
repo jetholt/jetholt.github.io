@@ -728,13 +728,13 @@ const ObjectivesType = Object.freeze({
     "Complete Ordinators": {},
     "Complete East Empire Company": {},
     "Complete Ja'Natta Syndicate": {},
-    /*    "Complete Cyrodiil + Skyrim Fighters Guild": {},
+    "Complete Cyrodiil + Skyrim Fighters Guild": {},
     "Complete Cyrodiil + Skyrim Mages Guild": {},
     "Complete Cyrodiil + Skyrim Thieves Guild": {},
     "Complete Kingdom of Anvil": {},
     "Complete the Abecette Fight Pit, Narsis Arena, and Dragonstar Arena": {},
     "Complete Itinerant Priests": {},
-    "Complete all bounties in Morrowind, Cyrodiil, and Skyrim": {}, */
+    "Complete all bounties in Morrowind, Cyrodiil, and Skyrim": {},
     "Fully explore Kemel-Ze": {},
     "Fully explore Mora Ancestral Tomb": {},
     "Create a custom CE enchant on every equipment slot": {[ConditionType.HAS_SKILL]:[SkillsType.ENCHANT]},
@@ -757,37 +757,9 @@ const ObjectivesType = Object.freeze({
     "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 3": {},
     "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 4": {},
     "Reach Level 20 whilst remaining within Tamriel Rebuilt Map 5": {},
-/*    "Reach Level 20 whilst remaining within Cyrodiil": {},
-    "Reach Level 20 whilst remaining within Skyrim": {}, */
+    "Reach Level 20 whilst remaining within Cyrodiil": {},
+    "Reach Level 20 whilst remaining within Skyrim": {},
 });
-
-/* Commenting these out because BOH didn't like them
-const UnfilteredCollectionObjectivesType = Object.freeze({
-    "Visit every settlement": {},
-    "Collect all 36 Lessons of Vivec": {},
-    "Collect all Daedric Weapons and Armor": {},
-    "Collect all House Dagoth Souls": {},
-    "Collect all unique enchanted Robes": {},
-    "Collect all unique enchanted Shirts": {},
-    "Collect all unique enchanted Pants": {},
-    "Collect all ring artifacts": {},
-    "Collect all amulet artifacts": {},
-    "Collect all unique enchanted Shoes": {[ConditionType.NOT_HAS_RACE]:[RacesType.KHAJIIT, RacesType.ARGONIAN, RacesType.CATHAY_RAHT, RacesType.DAGI_RAHT, RacesType.IMGA, RacesType.NAGA, RacesType.TOJAY]},
-});
-
-const CollectionObjectivesType = Object.freeze({
-    "Collect all unique Axes": {[ConditionType.HAS_SKILL]:[SkillsType.AXE],[ConditionType.HAS_RACE]:[RacesType.ORC, RacesType.NORD, RacesType.REDGUARD, RacesType.MALAHK_ORC, RacesType.CHIMERI_QUEY]},
-    "Collect all unique Bows and Crossbows": {[ConditionType.HAS_SKILL]:[SkillsType.MARKSMAN], [ConditionType.HAS_RACE]:[RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.YNESAI, RacesType.RIVERFOLK]},
-    "Collect all unique Blunt Weapons": {[ConditionType.HAS_SKILL]:[SkillsType.BLUNT_WEAPON], [ConditionType.HAS_RACE]:[RacesType.NORD, RacesType.IMPERIAL, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.TOJAY, RacesType.NAGA]},
-    "Collect all unique Long Blades": {[ConditionType.HAS_SKILL]:[SkillsType.LONG_BLADE], [ConditionType.HAS_RACE]:[RacesType.REDGUARD, RacesType.IMPERIAL, RacesType.DARK_ELF, RacesType.NORD, RacesType.CATHAY_RAHT, RacesType.CATHAY, RacesType.RIVERFOLK]},
-    "Collect all unique Short Blades": {[ConditionType.HAS_SKILL]:[SkillsType.SHORT_BLADE], [ConditionType.HAS_RACE]:[RacesType.DARK_ELF, RacesType.KHAJIIT, RacesType.REDGUARD, RacesType.YNESAI, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.OHMES, RacesType.SUTHAY]},
-    "Collect all unique Spears": {[ConditionType.HAS_SKILL]:[SkillsType.SPEAR], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.NORD, RacesType.AYLEID, RacesType.SEA_ELF, RacesType.CATHAY, RacesType.DUADRI]},
-    "Collect all unique Shields": {[ConditionType.HAS_SKILL]:[SkillsType.BLOCK], [ConditionType.HAS_RACE]:[RacesType.ORC, RacesType.KEPTU_QUEY, RacesType.RIVERFOLK, RacesType.BRETON]},
-    "Collect all Heavy Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.HEAVY_ARMOR], [ConditionType.HAS_RACE]:[RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.KEPTU_QUEY, RacesType.MALAHK_ORC]},
-    "Collect all Medium Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.MEDIUM_ARMOR], [ConditionType.HAS_RACE]:[RacesType.ARGONIAN, RacesType.NORD, RacesType.ORC, RacesType.REDGUARD, RacesType.MALAHK_ORC]},
-    "Collect all Light Armor artifacts": {[ConditionType.HAS_SKILL]:[SkillsType.LIGHT_ARMOR], [ConditionType.HAS_RACE]:[RacesType.KHAJIIT, RacesType.WOOD_ELF, RacesType.DARK_ELF, RacesType.IMPERIAL, RacesType.CATHAY, RacesType.CATHAY_RAHT, RacesType.DUADRI, RacesType.OHMES, RacesType.OHMES_RAHT, RacesType.SUTHAY]},
-});
-*/
 
 const GeographicStipulationsType = Object.freeze({
     "Start in Gnaar Mok": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
@@ -824,18 +796,16 @@ const GeographicStipulationsType = Object.freeze({
     "Start in Gan-Ettu Camp": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Yandaran": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Ishanuran Camp": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
-/*    "Start in Anvil": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
+    "Start in Anvil": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Brina Cross": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Charach": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Salthearth": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Archad": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Gosha Inn": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Garlas Agea": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
-    "Start in Santaral Osi's House": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"], [ConditionType.HAS_SKILL]:[SkillType.ALTERATION]},
     "Start in Dragonstar": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Karthgad": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
     "Start in Karthwasten": {[ConditionType.NOT_HAS_OBJECTIVE]:["whilst remaining within"],[ConditionType.NOT_HAS_STIPULATION]:["Start in","No Seyda Neen"]},
-*/
 });
 
 const StipulationsType = Object.freeze({
