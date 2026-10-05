@@ -13,7 +13,9 @@ layout: compress
 		{% if page.custom_css %}
 		<link href='{{ site.baseurl }}/assets/{{ page.custom_css }}.css{{ cacheBust }}' rel='stylesheet' type='text/css'>
 		{% endif %}
-		<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+		{% if page.custom_favicon %}
+		<link rel="shortcut icon" type="image/x-icon" href="/assets/images/{{ page.custom_favicon }}.png">
+		{% endif %}
 	</head>
   	<body>
   	{{ content }}
