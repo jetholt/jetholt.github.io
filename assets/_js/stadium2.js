@@ -3287,8 +3287,11 @@ function createPokemon(pokemon, index) {
     let container = document.createElement("div");
     container.classList = "pokemon-container pokemon";
     container.style.backgroundColor = pokemon.type1.background;
-    if(Object.hasOwn(pokemon, "type2")){
+    if(Object.hasOwn(pokemon, "type2")) {
         container.style.borderColor = pokemon.type2.border;
+    }
+    else {
+        container.style.borderColor = pokemon.type1.border;
     }
 
     let imageAndName = document.createElement("div");
