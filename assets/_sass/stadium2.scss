@@ -51,9 +51,15 @@ input {
     // Mobile
     @media (max-width: 1000px) {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
         width: 652px;
         grid-template-columns: auto auto;
+        margin: auto;
+    }
+    // Mobile
+    @media (max-width: 650px) {
+        grid-template-columns: 1fr;
+        width: 326px;
+        grid-template-columns: auto;
         margin: auto;
     }
 }
@@ -161,8 +167,9 @@ input {
 }
 footer {
     font-size: 32px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    //display: grid;
+    //grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 1rem;
     margin: 8px;
@@ -178,6 +185,7 @@ footer {
 
     :nth-child(3) {
         text-align: right;
+        flex: 1;
     }
 
     // Mobile
