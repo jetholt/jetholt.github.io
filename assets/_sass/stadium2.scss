@@ -1,0 +1,192 @@
+body{
+    font-family: system-ui, sans-serif;
+    background-color: whitesmoke;
+    font-size: 15px;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    font-size: 32px;
+    position: relative;
+    margin: 8px;
+    img {
+        width: 40px;
+        top: -1px;
+        position: absolute;
+        -webkit-user-drag: none;
+        user-drag: none;
+        @media (max-width: 600px) {
+            width: 30px;
+        }
+    }
+    span {
+        padding-left: 45px
+    }
+}
+input {
+    position: relative;
+    -webkit-user-drag: none;
+    user-drag: none;
+    &:hover {
+        top: 1px;
+    }
+    &:active {
+        top: 2px;
+        left: 1px;
+    }
+}
+.outer-wrapper {
+    flex: 1;
+    padding-top: 30px;
+}
+.inner-wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+    padding: auto;
+    margin: auto;
+    width: 1024px;
+
+    // Mobile
+    @media (max-width: 1000px) {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        width: 652px;
+        grid-template-columns: auto auto;
+        margin: auto;
+    }
+}
+.pokemon-container {
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: solid;
+    box-sizing: border-box;
+    width: 316px;
+    height: 270px;
+}
+.dummy-pokemon {
+    border-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+        width: 125px;
+        height: 125px;
+    }
+}
+.pokemon {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 6px;
+    padding: 5px;
+    .image-and-name {
+        .image-container {
+            display: flex;
+            width: 110px;
+            height: 110px;
+            background: white;
+            margin: 5px auto;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        .name-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2px;
+            span {
+                min-width: 115px;
+                background: white;
+                text-align: center;
+                padding: 3px;
+                font-weight: bold;
+                line-height: 120%;
+                border-radius: 10px;
+            }
+        }
+    }
+    .reroll-and-types {
+        .reroll{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            input {
+                width: 85px;
+                height: 85px;
+            }
+        }
+        .types {
+            text-align: center;
+            .type-descriptor {
+                font-size: smaller;
+            }
+            .types-container {
+                .type {
+                    padding: 3px 5px;
+                    border-radius: 3px;
+                    display: inline-block;
+                    font-weight: bold;
+                    margin: 2px;
+                    color: white;
+                    font-size: smaller;
+                }
+            }
+        }
+    }
+    .move {
+        background: white;
+        box-sizing: border-box;
+        border: 2px solid white;
+        border-radius: 10px;
+        text-align: center;
+        overflow: hidden;
+        height: 48.33px;
+        div:nth-child(1) {
+            line-height: 25px;
+        }
+        div:nth-child(2) {
+            height: 20px;
+            color: white;
+            font-size: smaller;
+            line-height: 20px;
+        }
+    }
+}
+footer {
+    font-size: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    margin: 8px;
+    font-size: 20px;
+
+    :nth-child(1) {
+        text-align: left;
+    }
+
+    :nth-child(2) {
+        text-align: center;
+    }
+
+    :nth-child(3) {
+        text-align: right;
+    }
+
+    // Mobile
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+
+        span {
+            text-align: center !important;
+        }
+    }
+}

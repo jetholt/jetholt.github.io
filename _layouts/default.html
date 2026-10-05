@@ -10,11 +10,15 @@ layout: compress
 		<meta name='viewport' content='width=device-width, initial-scale=1'>
 		<meta name='description' content='{{ site.description }}'>
 		<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-		<link href='{{ site.baseurl }}/assets/app.css{{ cacheBust }}' rel='stylesheet' type='text/css'>
+		{% if page.custom_css %}
+		<link href='{{ site.baseurl }}/assets/{{ page.custom_css }}.css{{ cacheBust }}' rel='stylesheet' type='text/css'>
+		{% endif %}
 		<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
 	</head>
   	<body>
   	{{ content }}
 	</body>
-	<script src='{{ site.baseurl }}/assets/app.js{{ cacheBust }}'></script>
+	{% if page.custom_js %}
+	<script src='{{ site.baseurl }}/assets/{{ page.custom_js }}.js{{ cacheBust }}'></script>
+	{% endif %}
 </html>
