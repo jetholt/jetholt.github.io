@@ -167,9 +167,8 @@ input {
 }
 footer {
     font-size: 32px;
-    display: flex;
-    //display: grid;
-    //grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 1rem;
     margin: 8px;
@@ -185,7 +184,6 @@ footer {
 
     :nth-child(3) {
         text-align: right;
-        flex: 1;
     }
 
     // Mobile
