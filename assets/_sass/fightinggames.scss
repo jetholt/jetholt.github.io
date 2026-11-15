@@ -1,0 +1,294 @@
+
+@keyframes sparkcolor {
+    0% {
+        background-color: white;
+    }
+    10% {
+        background-color: white;
+    }
+    50% {
+        background-color: orangered;
+    }
+    100% {
+        background-color: red;
+    }
+}
+
+@keyframes sparkfade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes sparkx {
+    0% {
+        left: calc(var(--origin-x) + #{'random(-40px, 40px)'});  /* Scss is interpretting the random function with its' built-in, annoyingly */
+    }
+    100% {
+        left: calc(var(--origin-x) + var(--distance-x) + #{'random(-60px, 60px)'});  /* Scss is interpretting the random function with its' built-in, annoyingly */
+    }
+}
+
+@keyframes sparky {
+    0% {
+        top: calc(var(--origin-y) + #{'random(-30px, 30px)'}); /* Scss is interpretting the random function with its' built-in, annoyingly */
+    }
+    100% {
+        top: calc(var(--origin-y) + 50px + #{'random(0px, 80px)'}); /* Scss is interpretting the random function with its' built-in, annoyingly */
+    }
+}
+
+@keyframes logopulse {
+    0% {
+        height: 320px;
+        margin: 5px;
+    }
+    50% {
+        height: 330px;
+        margin: 0px;
+    }
+    100% {
+        height: 320px;
+        margin: 5px;
+    }
+}
+
+@keyframes instructionblink {
+    0% {
+        color: var(--pink);
+    }
+    100% {
+        color: whitesmoke;
+    }
+}
+
+:root {
+	--gray: #373731;
+	--pink: #d05d5d;
+}
+
+body{
+    font-family: "Silkscreen", sans-serif;
+    background: black;
+    color: var(--pink);
+    margin: 0px;
+    user-select: none;
+    -webkit-user-select: none;
+    text-shadow:
+        -0.1em -0.1em 0em var(--gray),
+        0em -0.1em 0em var(--gray),
+        0.1em -0.1em 0em var(--gray),
+        -0.1em 0em 0em var(--gray),
+        0.1em 0em 0em var(--gray),
+        -0.1em 0.1em 0em var(--gray),
+        0em 0.1em 0em var(--gray),
+        0.1em 0.1em 0em var(--gray);
+}
+
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+#effects2,#effects1{
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+}
+#effects1:before {
+    content: '';
+    opacity: 0.05;
+    width : 100%;
+    height : 100%;
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    background: linear-gradient(#ddd 50%, #fff 50%);
+    background-size: 100% 12px;
+    animation: pulse 5s ease-in-out infinite both;
+    mix-blend-mode: lighten;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#titlescreen {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    img {
+        height: 320px;
+        animation: logopulse 3s linear infinite;
+    }
+    h2 {
+        font-size: 20px;
+        animation: instructionblink 1s linear 1s infinite;
+    }
+    a {
+        color: var(--pink);
+    }
+}
+
+#fighting-game {
+    background-image: url(/assets/images/vivec_arena.png);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
+
+#healthbars {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    .healthbar-position {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 400px;
+        &.left {
+            left: 0;
+        }
+        &.right {
+            right: 0;
+        }
+        .healthbar-container {
+            position: relative;
+            background-color: var(--gray);
+            height: calc(2em + 30px);
+            box-sizing: border-box;
+            margin: 30px 50px;
+            padding: 10px;
+            &.left {
+                transform: skew(20deg);
+            }
+            &.right {
+                transform: skew(-20deg);
+            }
+            .healthbar-decorator {
+                background: var(--gray);
+                position: absolute;
+                top: -20px;
+                height: calc(2em + 50px);
+                z-index: 0;
+                max-width: 10px;
+                transition: max-width 1s ease;
+                &.expanded {
+                    max-width: 1000px;
+                }
+                &.left {
+                    left: -10px;
+                    background: linear-gradient(90deg,rgba(13, 13, 13, 1) 10%, rgba(55, 55, 49, 1) 100%);
+                }
+                &.right {
+                    right: -10px;
+                    background: linear-gradient(90deg,rgba(55, 55, 49, 1) 0%, rgba(13, 13, 13, 1) 90%);
+                }
+                .game-name {
+                    margin: 5px 20px;
+                    height: 1em;
+                    overflow: hidden;
+                    &.right {
+                        text-align: right;
+                    }
+                }
+            }
+            .healthbar-dead {
+                position: absolute;
+                background-color: #0d0d0d;
+                width: calc(100% - 20px);
+                height: calc(2em + 10px);
+                box-sizing: border-box;
+                padding: 5px;
+                .healthbar-shock {
+                    background: whitesmoke;
+                    width: 100%;
+                    height: 2em;
+                    transition-property: width;
+                    transition-delay: 1s;
+                    transition-duration: 300ms;
+                    transition-timing-function: ease-in;
+                    &.right {
+                        margin-left: auto; 
+                        margin-right: 0;
+                    }
+                }
+                .healthbar-current {
+                    position: relative;
+                    background: #d05d5d;
+                    height: 2em;
+                    top: -2em;
+                    width: 100%;
+                    &.right {
+                        margin-left: auto; 
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#games-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-height: 100%;
+    .game-outer {
+        position: relative;
+        display: inline-block;
+        margin: 20px;
+        .game-inner {
+            background-color: gray;
+            .game-dead {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                line {
+                    stroke: red;
+                    stroke-width: 5px;
+                    vector-effect: non-scaling-stroke;
+                }
+            }
+            .game-image img {
+                max-width: 300px;
+            }
+            .game-name {
+                margin: 0px;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: x-large;
+            }
+        }
+    }
+}
+    
+.sparks{
+    height: 0px;
+    .spark {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: red;
+        animation:
+            sparkcolor 1.5s linear 1 forwards,
+            sparkfade calc(0.25s + #{'random(0s, 0.25s)'}) ease-in calc(0.5s + #{'random(0s, 0.5s)'}) 1 forwards, /* Scss is interpretting the random function with its' built-in, annoyingly */
+            sparkx 1.5s cubic-bezier(0,1.04,.32,.9) 1 forwards,
+            sparky 1.5s cubic-bezier(.08,var(--bezier-y),.13,.98) 1 forwards;
+    }
+}

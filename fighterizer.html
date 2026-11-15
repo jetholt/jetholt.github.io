@@ -1,0 +1,77 @@
+---
+layout: default
+title: Fighting Games Randomizer
+description: Fighting Games
+custom_css: fighting-games
+custom_js: fighting-games
+custom_favicon: fightinggames
+google_fonts: 
+- Silkscreen
+---
+<main id="app">
+    <div id="effects1">
+        <div id="effects2">
+            <section id="titlescreen">
+                <img src="/assets/images/fighterizer.png">
+                <p>​</p>
+                <h2>PRESS ANY KEY TO BEGIN</h2>
+                <p>​</p>
+                <p>™ JETROID. 2026</p>
+                <p>IN ASSOCIATION WITH</p>
+                <a href="https://www.youtube.com/@BestOpinionHaver95">BEST OPINION HAVER</a>
+            </section>
+            <section id="fighting-game" class="hidden">
+                <div id="healthbars">
+                    <div class="healthbar-position left">
+                        <div class="healthbar-container left">
+                            <div class="healthbar-decorator left">
+                                <p class="game-name left"></p>
+                            </div>
+                            <div class="healthbar-dead left">
+                                <div class="healthbar-shock left"></div>
+                                <div class="healthbar-current left"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="healthbar-position right">
+                        <div class="healthbar-container right">
+                            <div class="healthbar-decorator right">
+                                <p class="game-name right"></p>
+                            </div>
+                            <div class="healthbar-dead right">
+                                <div class="healthbar-shock right"></div>
+                                <div class="healthbar-current right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="games-container">
+                    <div class="game-outer hidden">
+                        <div class="game-inner">
+                            <svg class="game-dead hidden" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <line x1="0" y1="0" x2="100" y2="100" />
+                                <line x1="100" y1="0" x2="0" y2="100" />
+                            </svg>
+                            <div class="game-image">
+                            </div>
+                            <p class="game-name"></p>
+                        </div>
+                        <div class="sparks"></div>
+                    </div>
+                    <div class="game-outer hidden">
+                        <div class="game-inner">
+                            <svg class="game-dead hidden" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <line x1="0" y1="0" x2="100" y2="100" />
+                                <line x1="100" y1="0" x2="0" y2="100" />
+                            </svg>
+                            <div class="game-image">
+                            </div>
+                            <p class="game-name"></p>
+                        </div>
+                        <div class="sparks"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
