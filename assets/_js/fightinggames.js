@@ -254,7 +254,7 @@ function hit() {
     forceX *= -1;
   }
 
-  let position = hitGame(gameOuter.querySelector(".game-inner"), forceX, forceX);
+  let position = hitGame(gameOuter, forceX, forceX);
   let radiusX = gameOuter.offsetWidth / 2;
   let radiusY = gameOuter.offsetHeight / 2;
   let midX = position[0] + radiusX;
